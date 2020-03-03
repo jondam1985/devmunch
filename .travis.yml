@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+- stable
+before_install:
+- npm install -g npm@latest
+deploy:
+  provider: heroku
+  edge: true
+  api_key:
+    secure: WGNC5qq9wCNtkqojLv+gW4pvsuR5+MRLnOR3kIerhqQ/BDd6pd98ImcuzNF7frao9i2IsesP3z+eXWkR1oiMrYmLjX+rm7QtrcGvgo7EgsTWiFDWZHxPENlbaUrD2nR014fLzTtmvvmcFSmLkzEYRKiQPviJz1Qal/VGqRz19A7jCFjx5/fkw1VGTZtKgeQZPWI/9Tayqajrbt1kv25C6eD+lcrwcBBFSSOWRL5HT+gJuRkHWTPghAZCUbAhmzsdIG3ClJm1qe5Qi7AKE/J/halwsinf5LE9eN32dxL7weyBdnN19k1ffXFOFcsqkVlSc+GEg6YwIEZlDrvCliwQdKSQuh4gySN0iHjEsKZ13qxLvRASv+avTgkpmdFqsiv+qfJPa3hVQe6Fv/inhl1jMDhLZd2ruHBSE9+n1GONY39TilopiIV6KoNnL2uefZkP7xzvQxTJLQyRf4Povagm3q3o0VO/XyliiXnzmFnria1R4sdAJ+yNYt1sUahJ4J5WFCJ8JE1nL9pAz0Owg4WZSPF2a0TLkxHum4/kZeLjWaSNpTYrcTeBWsy1jZ8J0Yd4jQmARE09abBtddfdzXVNSBw9GwoBu09LPN5dA2z3uLALuQ+RsS9hGK4fi6xuStgxzZ6+dnCJI9YhaC2A5BKdZWcvUYVFGZbHVy/G4Vao9l8=
+  app: devmunch
+  on:
+    repo: jondam1985/devmunch
+    branch: master
