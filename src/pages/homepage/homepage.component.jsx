@@ -6,7 +6,7 @@ import SingUpModal from '../../components/modal/sign-up-modal.component'
 const HomePage = () => {
     
   const openModel = () =>{
-    open(<SignInMOdal />)
+    open(<SignInModal />)
   }
 
   const openSignUp = () => {
