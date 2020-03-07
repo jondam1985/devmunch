@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const API = require("./routes");
 const PORT = process.env.PORT || 3030;
 const app = express();
 
@@ -14,6 +15,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 //API routes
+
 
 //Other server calls
 app.get("*", (req, res) => {
