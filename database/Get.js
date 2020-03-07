@@ -1,46 +1,38 @@
 import Model from '../models/Model';
 
+function cb(err, res){
+    if(err) throw new Error(err);
+    return res;
+}
+
 class Get {
 
     UserById(id){
-        Model.User.findById(id, (err, result)=>{
-            if(err){
-                throw new Error(err);
-            }
-            return result;
-        });
+        Model.User.findById(id, cb);
     }
 
-    MentorsByUserId(id){
+    async MentorsByUserId(id){
         
-        Model.User.find({}, (err, res) => {
-            if(err) throw new Error(err);
-            return res;
-        }).then(users => {
-            return users.filter(user =>{
-                return (user.mentees.contains(id));
-            });
+       let users = await Model.User.find({});
+       
+        return users.filter(user =>{
+            return (user.mentees.contains(id));
         });
+        
     }
 
     MenteesByUserId(id){
         let user = this.GetUserByID(id);
         Model.User.find({_id:{
             $in: user.mentees
-        }}, (err,res)=>{
-            if(err) throw new Error(err);
-            return res;
-        });
+        }}, cb);
     }
 
     BadgesByUserId(id){
         let user = this.UserByID(id);
         Model.Badge.find({_id:{
             $in: user.badges
-        }}, (err,res)=>{
-            if(err) throw new Error(err);
-            return res;
-        });
+        }}, cb);
     }
 
     AchievementsByUserId(id){
@@ -49,20 +41,14 @@ class Get {
         
         Model.Achievement.find({_id:{
             $in: user.achievements
-        }}, (err,res)=>{
-            if(err) throw new Error(err);
-            return res;
-        });
+        }}, cb);
     }
 
     ProjectsByUserId(id){
         let user = this.GetUserByID;
         Model.Project.find({_id:{
             $in: user.projects
-        }}, (err, res)=>{
-            if(err) throw new Error(err);
-            return res;
-        });
+        }}, cb);
     }
 }
 

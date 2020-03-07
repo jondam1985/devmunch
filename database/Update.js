@@ -1,35 +1,60 @@
 import Model from '../models/Model';
 
+function cb(err, res){
+    if(err) throw new Error(err);
+    return res;
+}
+
 class Update {
 
-    User(user){
-        Model.User.create(user,(err,res)=>{
-            if(err) throw new Error(err);
-            return res;
-        });
+    User(id,user){
+        Model.User.FindByIdAndUpdate(id,user,cb);
     }
 
-    Badge(badge){
-        Model.Badge.create(badge, (err,res)=>{
-            if(err) throw new Error(err);
-            return res;
-        });
+    UserLogIn(id){
+        Model.user.FindByIdAndUpdate(id,{
+            $set:{lastLogIn: Date.now}
+        }, cb);
     }
 
-    Achievement(achievement){
-        
-      Model.Achievement.create(achievement, (err, res)=>{
-        if(err) throw new Error(err);
-        return res;
-      });
-        
+    Badge(id,badge){
+        Model.Badge.FindByIdAndUpdate(id,badge, cb);
     }
 
-    Project(project){
-        Model.Project.create(project, (err, res)=>{
-            if(err) throw new Error(err);
-            return res;
-        });
+    Project(id, project){
+        Model.Project.FindByIdAndUpdate(id,project, cb);
+    }
+   
+    AddCommentToProject(id,userId,message){
+        Model.Project.FindByIdAndUpdate(id,{
+            $push:{
+                comments: {
+                    user: userId,
+                    message: message
+                }
+            }}, cb);
+    }
+
+    AddCollaboraterToProject(id, collaboraterId){
+        Model.Project.FindByIdAndUpdate(id,{
+            $push:{
+                collaborators: collaboraterId
+            }
+        }, cb);
+    }
+
+    AddTagsToProject(id, tags){
+        Model.Project.FindByIdAndUpdate(id,{
+            $push:{
+                tags:{
+                    $each:tags
+                }
+            }
+        }, cb);
+    }
+
+    Achievement(id,achievement){        
+      Model.Achievement.FindByIdAndUpdate(id,achievement, cb);        
     }
 }
 

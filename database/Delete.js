@@ -1,34 +1,27 @@
 import Model from '../models/Model';
 
+function cb(err, res){
+    if(err) throw new Error(err);
+    return res;
+}
+
 class Delete {
 
     UserById(id){
-        Model.User.findByIdAndDelete(id,(err,res)=>{
-            if(err) throw new Error(err);
-            return res;
-        });
+        Model.User.findByIdAndDelete(id, cb);
     }
 
     BadgeById(id){
-        Model.Badge.findByIdAndDelete(id,(err,res)=>{
-            if(err) throw new Error(err);
-            return res;
-        });
+        Model.Badge.findByIdAndDelete(id, cb);
     }
 
     AchievementById(id){
         
-      Model.Achievement.findByIdAndDelete(id,(err,res)=>{
-        if(err) throw new Error(err);
-        return res;
-        });        
+      Model.Achievement.findByIdAndDelete(id, cb);        
     }
 
     ProjectById(id){
-        Model.Project.findByIdAndDelete(id,(err,res)=>{
-            if(err) throw new Error(err);
-            return res;
-        });
+        Model.Project.findByIdAndDelete(id, cb);
     }
 }
 

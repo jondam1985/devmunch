@@ -1,4 +1,3 @@
-import Model from '../models/Model';
 import Get from './Get';
 import Create from './Create';
 import Update from './Update';
@@ -10,7 +9,7 @@ class DB {
         this.Create = Create;
         this.Delete = Delete;
         this.Update = Update;
-    }
-    
+    }    
 }
+
 export default DB

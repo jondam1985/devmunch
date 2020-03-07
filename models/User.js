@@ -15,6 +15,9 @@ const userSchema = new Schema(
         trim:true,
 
     },
+    pictureUrl:{
+        type:String
+    },    
     fullName:{
         type:String,
         trim:true
@@ -87,6 +90,10 @@ const userSchema = new Schema(
     }]
   }
 );
+
+userSchema.pre('findOnAndUpdate',()=>{
+    this.set({ lastUpdated: Date.now });
+})
 
 const User = mongoose.model("User", userSchema);
 
