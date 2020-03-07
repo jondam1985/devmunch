@@ -13,7 +13,6 @@ const userSchema = new Schema(
     email:{
         type:String,
         trim:true,
-
     },
     pictureUrl:{
         type:String
@@ -37,9 +36,6 @@ const userSchema = new Schema(
         type: String
     },
     mentees:[{
-        type : mongoose.Types.ObjectId, ref: 'User'
-    }],
-    mentors:[{
         type : mongoose.Types.ObjectId, ref: 'User'
     }],
     isMentor:{
