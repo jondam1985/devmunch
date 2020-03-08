@@ -46,12 +46,13 @@ call.get("/api/get-code-score/:username&:language", (req, res) => {
     )
 })
 
-call.get("/api/get-stack-rep/:username", (req, res) => {
+call.get("/api/get-stack-rep/:userid", (req, res) => {
     let username = req.params.username;
     res.send(
-        axios.get(`http://api.stackexchange.com/2.2/users?inname=${username}&site=stackoverflow`)
+        axios.get(`http://api.stackexchange.com/2.2/users/${userid}?site=stackoverflow`)
             .then(response => {
-                return response.data;
+                let reputation = response.data.items[0].reputation;
+                return reputation;
             })
     )
 })
