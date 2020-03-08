@@ -11,44 +11,40 @@ class Get {
         Model.User.findById(id, cb);
     }
 
-    async MentorsByUserId(id){
-        
-       let users = await Model.User.find({});
-       
-        return users.filter(user =>{
-            return (user.mentees.contains(id));
-        });
-        
+    MentorsByUserId(id){        
+        Model.User.find({mentees:id}, cb);        
     }
 
     MenteesByUserId(id){
-        let user = this.GetUserByID(id);
-        Model.User.find({_id:{
-            $in: user.mentees
-        }}, cb);
+        Model.User.findById(id)
+        .populate({path:'mentees'},(err,res)=>{
+            if(err) throw new Error(err);
+            return res.mentees;
+        });
     }
 
     BadgesByUserId(id){
-        let user = this.UserByID(id);
-        Model.Badge.find({_id:{
-            $in: user.badges
-        }}, cb);
+        Model.User.findById(id)
+        .populate({path:'badges'},(err,res)=>{
+            if(err) throw new Error(err);
+            return res.badges;
+        });
     }
 
     AchievementsByUserId(id){
-        
-        let user = this.UserByID(id);
-        
-        Model.Achievement.find({_id:{
-            $in: user.achievements
-        }}, cb);
+        Model.User.findById(id)
+        .populate({path:'achievements'},(err,res)=>{
+            if(err) throw new Error(err);
+            return res.achievements;
+        });
     }
 
     ProjectsByUserId(id){
-        let user = this.GetUserByID;
-        Model.Project.find({_id:{
-            $in: user.projects
-        }}, cb);
+        Model.User.findById(id)
+        .populate({path:'projects'},(err,res)=>{
+            if(err) throw new Error(err);
+            return res.projects;
+        });
     }
 }
 
