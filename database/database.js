@@ -3,13 +3,11 @@ import Create from './Create';
 import Update from './Update';
 import Delete from './Delete';
 
-class DB {
-    constructor(){
-        this.Get = Get;
-        this.Create = Create;
-        this.Delete = Delete;
-        this.Update = Update;
-    }    
+const DB = {
+    Get,
+    Create,
+    Update,
+    Delete
 }
 
-export default DB
+export default DB;

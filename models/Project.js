@@ -1,21 +1,22 @@
 import mongoose from 'mongoose';
 import User from './User';
+import {ObjectID} from 'mongodb';
 
 const Schema = mongoose.Schema;
 
 const projectSchema = new Schema({
     owner:{
-        type: mongoose.Types.ObjectId, ref: 'User'
+        type: ObjectID, ref: 'User'
     },
     name:{
         type: String,
         required: true
     },
     externalLink: String,    
-    collaborators:[{type: mongoose.Types.ObjectId, ref:'User'}],
+    collaborators:[{type: ObjectID, ref:'User'}],
     comments:[{
         user:{
-            type: mongoose.Types.ObjectId, ref: 'User'
+            type: ObjectID, ref: 'User'
         },
         message:{
             type: String

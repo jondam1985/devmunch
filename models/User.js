@@ -1,5 +1,6 @@
 //User DB model
 import mongoose from 'mongoose';
+import {ObjectID} from 'mongodb';
 
 const Schema = mongoose.Schema;
 
@@ -36,32 +37,32 @@ const userSchema = new Schema(
         type: String
     },
     mentees:[{
-        type : mongoose.Types.ObjectId, ref: 'User'
+        type : ObjectID, ref: 'User'
     }],
     isMentor:{
         type: Boolean
     },
     projects:[{
-        type: mongoose.Types.ObjectId, ref: 'Project'
+        type: ObjectID, ref: 'Project'
     }],
     level:{
         type:Number
     },
     badges:[{
-        type: mongoose.Types.ObjectId, ref: 'Badge',
+        type: ObjectID, ref: 'Badge',
         obtainedOn: {
             type: Date,
             default: Date.now
         }
     }],
     chatThreads:[{
-        type: mongoose.Types.ObjectId, ref: 'ChatThread'
+        type: ObjectID, ref: 'ChatThread'
     }],
     mentorRating: {
         type: Number
     },
     achievements:[{
-        type: mongoose.Types.ObjectId, ref: 'Achievement',
+        type: ObjectID, ref: 'Achievement',
         obtainedOn: {
             type: Date,
             default: Date.now

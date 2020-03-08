@@ -5,27 +5,30 @@ function cb(err, res){
     return res;
 }
 
-class Update {
+/**
+ * Collection of Update methods from the database
+ */
+const Update = {
 
-    User(id,user){
+    User: (id,user) => {
         Model.User.FindByIdAndUpdate(id,user,cb);
-    }
+    },
 
-    UserLogIn(id){
+    UserLogIn: (id) => {
         Model.user.FindByIdAndUpdate(id,{
             $set:{lastLogIn: Date.now}
         }, cb);
-    }
+    },
 
-    Badge(id,badge){
+    Badge: (id,badge) => {
         Model.Badge.FindByIdAndUpdate(id,badge, cb);
-    }
+    },
 
-    Project(id, project){
+    Project: (id, project) => {
         Model.Project.FindByIdAndUpdate(id,project, cb);
-    }
+    },
    
-    AddCommentToProject(id,userId,message){
+    AddCommentToProject: (id,userId,message) => {
         Model.Project.FindByIdAndUpdate(id,{
             $push:{
                 comments: {
@@ -33,17 +36,17 @@ class Update {
                     message: message
                 }
             }}, cb);
-    }
+    },
 
-    AddCollaboraterToProject(id, collaboraterId){
+    AddCollaboraterToProject: (id, collaboraterId) => {
         Model.Project.FindByIdAndUpdate(id,{
             $push:{
                 collaborators: collaboraterId
             }
         }, cb);
-    }
+    },
 
-    AddTagsToProject(id, tags){
+    AddTagsToProject: (id, tags) => {
         Model.Project.FindByIdAndUpdate(id,{
             $push:{
                 tags:{
@@ -51,9 +54,9 @@ class Update {
                 }
             }
         }, cb);
-    }
+    },
 
-    Achievement(id,achievement){        
+    Achievement: (id,achievement) => {        
       Model.Achievement.FindByIdAndUpdate(id,achievement, cb);        
     }
 }

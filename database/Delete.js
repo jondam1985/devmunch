@@ -4,23 +4,25 @@ function cb(err, res){
     if(err) throw new Error(err);
     return res;
 }
+/**
+ * Collection of Delete methods from the database
+ */
+const Delete = {
 
-class Delete {
-
-    UserById(id){
+    UserById: (id) => {
         Model.User.findByIdAndDelete(id, cb);
-    }
+    },
 
-    BadgeById(id){
+    BadgeById: (id) => {
         Model.Badge.findByIdAndDelete(id, cb);
-    }
+    },
 
-    AchievementById(id){
+    AchievementById: (id) => {
         
       Model.Achievement.findByIdAndDelete(id, cb);        
-    }
+    },
 
-    ProjectById(id){
+    ProjectById: (id) => {
         Model.Project.findByIdAndDelete(id, cb);
     }
 }
