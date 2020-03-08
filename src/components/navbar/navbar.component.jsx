@@ -1,7 +1,7 @@
 import React from 'react';
 import ButtonGenerator from '../button-generator/button-generator.component';
 
-const NavDashboard = () => {
+const NavBar = () => {
 
   return(
     <div>
@@ -13,4 +13,4 @@ const NavDashboard = () => {
   )
 }
 
-export default NavDashboard;
+export default NavBar;
