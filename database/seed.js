@@ -7,7 +7,7 @@ mongoose.connect(process.env.MONGODB_URI ||process.env.DEV_MONGODB || "mongodb:/
   useFindAndModify: false
 });
 
-
+Date.now(); 
 let userSeed = [
     {
         userName: "TestUser1",
@@ -16,7 +16,8 @@ let userSeed = [
         fullName: "Test McTestface",
         stackOverflowId: "stackID",
         codewarsId: "codewarsID",
-        gitHubId: "gitID"
+        gitHubId: "gitID",
+        level: 20
 
     },
 

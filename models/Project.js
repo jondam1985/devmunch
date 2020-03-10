@@ -23,7 +23,7 @@ const projectSchema = new Schema({
         },
         timestamp:{
             type: Date,
-            default: Date.now
+            default: Date.now()
         }
     }],
     lastUpdated:{
@@ -32,7 +32,7 @@ const projectSchema = new Schema({
     tags:[String],
     createdOn:{
         type: Date,
-        default: Date.now
+        default: Date.now()
     }    
 });
 

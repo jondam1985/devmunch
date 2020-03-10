@@ -16,7 +16,7 @@ const badgeSchema = new Schema({
     },
     createdOn:{
         type: Date,
-        default: Date.now
+        default: Date.now()
     }    
 });
 

@@ -43,19 +43,23 @@ const userSchema = new Schema(
         type : ObjectID, ref: 'User'
     }],
     isMentor:{
-        type: Boolean
+        type: Boolean,
+        default:false
     },
     projects:[{
         type: ObjectID, ref: 'Project'
     }],
     level:{
-        type:Number
+        type:Number,
+        default: 0
     },
     badges:[{
-        type: ObjectID, ref: 'Badge',
+        badgeId:{
+            type: ObjectID, ref: 'Badge'
+        },
         obtainedOn: {
             type: Date,
-            default: Date.now
+            default: Date.now()
         }
     }],
     chatThreads:[{
@@ -68,21 +72,21 @@ const userSchema = new Schema(
         type: ObjectID, ref: 'Achievement',
         obtainedOn: {
             type: Date,
-            default: Date.now
+            default: Date.now()
         }
     }],
     langInterestTags:[String],
     lastLogIn:{
         type: Date,
-        default: Date.now
+        default: Date.now()
     },
     lastUpdated:{
         type: Date,
-        default: Date.now
+        default: Date.now()
     },
     createdOn:{
         type: Date,
-        default: Date.now
+        default: Date.now()
     },
     userStats:[{
         name: String,
@@ -92,7 +96,7 @@ const userSchema = new Schema(
 );
 
 userSchema.pre('findOnAndUpdate',()=>{
-    this.set({ lastUpdated: Date.now });
+    this.set({ lastUpdated: Date.now() });
 })
 
 const User = mongoose.model("User", userSchema);
