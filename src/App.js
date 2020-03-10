@@ -1,27 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import React,{useState,useEffect} from 'react';
 import './App.css';
-import ProjectsPage from './pages/projects-page/projects-page.component'
+import Page from './components/page/page.component';
+import Login from './components/login/login-copmonent';
 
 function App() {
+
+  const [user,setUser] = useState(null);
+
+  const handleGithHubOAuth = (oAuthUserInput) => {
+    console.log(oAuthUserInput)
+    // fetch('to: github oAuth')
+    // .then(response => {
+    //   setUser(response);
+    // })
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-          <ProjectsPage/>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          this a another test :)
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      {
+        user ? 
+          (
+            <>
+              <Page >
+                THE DIFF PAGES WILL GO HERE
+              </Page> 
+            </>
+          )
+        :
+        <Login oAuthFunc={handleGithHubOAuth} />
+      }
+    </div>  
   );
 }
 
