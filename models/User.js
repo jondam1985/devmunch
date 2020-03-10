@@ -4,6 +4,10 @@ import {ObjectID} from 'mongodb';
 
 const Schema = mongoose.Schema;
 
+
+/**
+ * @class User
+ */
 const userSchema = new Schema(
   {
     userName: {

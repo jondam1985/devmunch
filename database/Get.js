@@ -1,6 +1,6 @@
 import model from '../models/Model';
 import { ObjectID } from 'mongodb';
-import {Schema, Model} from 'mongoose';
+import {Model} from 'mongoose';
 
 
 function cb(err, res){
@@ -15,8 +15,8 @@ const Get =  {
 
     /**
      * Finds a single user by their id
-     * @param {ObjectID} id 
-     * @return {Schema<User>} user
+     * @param {ObjectID} id user Id
+     * @returns {Model<Document, model.User>} User or null
      */
     UserById: (id) => {
         model.User.findById(id, cb);
@@ -24,7 +24,7 @@ const Get =  {
 
     /**
      * finds all mentors of the given user
-     * @param {ObjectID} id 
+     * @param {ObjectID} id user Id
      * @return {[model.User]}
      */
     MentorsByUserId: (id) => {         
@@ -33,7 +33,7 @@ const Get =  {
 
     /**
      * finds all mentees of a given user 
-     * @param {ObjectID} id 
+     * @param {ObjectID} id user Id
      * @return {[User]} array of Users
      */
     MenteesByUserId: (id)=>{
@@ -46,7 +46,7 @@ const Get =  {
 
     /**
      * finds and populates all the badges of a given user
-     * @param {ObjectID} id
+     * @param {ObjectID} id user Id
      * @return {[Badge]} 
      */
     BadgesByUserId: (id) => {
@@ -58,7 +58,7 @@ const Get =  {
     },
     /**
      * finds and populates all the achievements of a given user 
-     * @param {ObjectID} id 
+     * @param {ObjectID} id user Id
      * @return {[Schema<Achievement>]} achievements
      */
     AchievementsByUserId: (id) =>{
@@ -71,8 +71,8 @@ const Get =  {
 
     /**
      * finds and populates all projects created by a given user  
-     * @param {ObjectID} id
-     * @return {[Schema<Project>]} projects     
+     * @param {ObjectID} id user Id
+     * @return {[Model]} projects     
      */
     ProjectsByUserId: (id) => {
         model.User.findById(id)
