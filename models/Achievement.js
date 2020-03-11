@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
@@ -22,4 +22,4 @@ const achievementSchema = new Schema({
 
 const Achievment = mongoose.model("Project", achievementSchema);
 
-export default Achievment;
+module.exports = Achievment;

@@ -1,6 +1,6 @@
 //User DB model
-import mongoose from 'mongoose';
-import {ObjectID} from 'mongodb';
+const mongoose = require('mongoose');
+const {ObjectID} = require('mongodb');
 
 const Schema = mongoose.Schema;
 
@@ -66,33 +66,27 @@ const userSchema = new Schema(
         type: ObjectID, ref: 'ChatThread'
     }],
     mentorRating: {
-        type: Number
+        type: Number,
+        default: 0
     },
     achievements:[{
         type: ObjectID, ref: 'Achievement',
         obtainedOn: {
             type: Date,
-            default: Date.now()
+            default: Date.now
         }
     }],
     langInterestTags:[String],
     lastLogIn:{
         type: Date,
-        default: Date.now()
-    },
-    lastUpdated:{
-        type: Date,
-        default: Date.now()
-    },
-    createdOn:{
-        type: Date,
-        default: Date.now()
+        default: Date.now
     },
     userStats:[{
         name: String,
         value: String
     }]
-  }
+  },
+  {timestamps: true}
 );
 
 userSchema.pre('findOnAndUpdate',()=>{
@@ -101,4 +95,4 @@ userSchema.pre('findOnAndUpdate',()=>{
 
 const User = mongoose.model("User", userSchema);
 
-export default User;
+module.exports = User;

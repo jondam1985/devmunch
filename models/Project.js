@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
-import User from './User';
-import {ObjectID} from 'mongodb';
+const mongoose = require('mongoose');
+const User = require('./User');
+const {ObjectID} = require('mongodb');
 
 const Schema = mongoose.Schema;
 
@@ -25,27 +25,26 @@ const projectSchema = new Schema({
             type: Date,
             default: Date.now()
         }
-    }],
-    lastUpdated:{
-        type: Date
-    },
-    tags:[String],
-    createdOn:{
-        type: Date,
-        default: Date.now()
-    }    
-});
+    }],    
+    tags:[String]      
+},
+{timestamps: true});
 
 projectSchema.pre('findOneAndUpdate',() =>{
     this.set({ lastUpdated: Date.now }); 
 });
 
 projectSchema.post('save',(doc)=>{
+    console.log("i'm updating");
+    console.log(doc.owner);    
     User.findByIdAndUpdate(doc.owner,{$push:{
         projects: doc._id
-    }});
+    }},(err,res)=>{
+        console.log(err);
+        console.log(res);
+    });
 });
 
 const Project = mongoose.model("Project", projectSchema);
 
-export default Project;
+module.exports = Project;
