@@ -9,7 +9,14 @@ const ButtonGenerator = () => {
       {
         name: 'Home',
         icon: 'url to icon',
-        mentee: true
+        mentee: true,
+        to:'/'
+      },
+      {
+        name: 'Profile',
+        icon: 'url to icon',
+        mentee: true,
+        to:'/profile'
       },
       {
         name: 'Mentors',
@@ -47,7 +54,7 @@ const ButtonGenerator = () => {
       
       return buttons.map((button,index)=>{
         return (
-          <NavButton key={index} name={button.name} icon={button.icon} />
+          <NavButton to={button.to} key={index} name={button.name} icon={button.icon} />
         )
       })
 
@@ -57,7 +64,7 @@ const ButtonGenerator = () => {
         return button.mentee === true
       }).map((button,index)=>{
         return (
-          <NavButton key={index} name={button.name} icon={button.icon} />
+          <NavButton to={button.to} key={index} name={button.name} icon={button.icon} />
         )
       })
     }

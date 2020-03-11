@@ -1,8 +1,9 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import NavBar from '../navbar/navbar.component';
 import Ribbon from "../ribbon/ribbon.component";
 
 const Page = ({children}) => {
+
   return(
     <div>
       {/* this is the purple dahsboard */}

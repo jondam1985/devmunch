@@ -1,8 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const NavButton = ({name,icon}) => {
+const NavButton = ({to,name,icon}) => {
   return(
-    <button>{icon}{name}</button>
+    <>
+      {
+        to ? (<Link to={to} >{name}</Link>) : null
+      }
+    </>
+    
   )
 }
 
