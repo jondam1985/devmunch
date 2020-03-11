@@ -1,7 +1,7 @@
-import Get from './Get';
-import Create from './Create';
-import Update from './Update';
-import Delete from './Delete';
+const Get = require('./Get');
+const Create = require('./Create');
+const Update = require('./Update');
+const Delete = require('./Delete');
 
 const DB = {
     Get,
@@ -10,4 +10,4 @@ const DB = {
     Delete
 }
 
-export default DB;
+module.exports = DB;

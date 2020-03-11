@@ -1,13 +1,20 @@
 let mongoose = require("mongoose");
 let db = require("../models/Model");
-require('dotenv').config();
+const {resolve} = require('path');
+let dot = require('dotenv').config({path: resolve(__dirname,"../.env")});
 
-mongoose.connect(process.env.MONGODB_URI ||process.env.DEV_MONGODB || "mongodb://localhost/workout", {
+console.log("dotenv?",dot);
+console.log(__dirname.replace("database",""));
+
+mongoose.connect(process.env.DEV_MONGODB || "mongodb://localhost/devmunch", {
   useNewUrlParser: true,
-  useFindAndModify: false
+  useFindAndModify: false,
+  useUnifiedTopology: true 
+},(err)=>{
+    if(err) {throw new Error(err)};
+    console.log("connected to: " + (process.env.DEV_MONGODB ? process.DEV_MONGODB:"localhost"));
 });
 
-Date.now(); 
 let userSeed = [
     {
         userName: "TestUser1",
@@ -17,148 +24,53 @@ let userSeed = [
         stackOverflowId: "stackID",
         codewarsId: "codewarsID",
         gitHubId: "gitID",
-        level: 20
-
+        level: 5,
+        langInterestTags: ["Javascript","PHP","React"]
     },
-
-]
-
-let workoutSeed = [
-  {
-    day: new Date().setDate(new Date().getDate()-10),
-    exercises: [
-      {
-        type: "resistance",
-        name: "Bicep Curl",
-        duration: 20,
-        weight: 100,
-        reps: 10,
-        sets: 4
-      }
-    ]
-  },
-  {
-    day: new Date().setDate(new Date().getDate()-9),
-    exercises: [
-      {
-        type: "resistance",
-        name: "Lateral Pull",
-        duration: 20,
-        weight: 300,
-        reps: 10,
-        sets: 4
-      }
-    ]
-  },
-  {
-    day: new Date().setDate(new Date().getDate()-8),
-    exercises: [
-      {
-        type: "resistance",
-        name: "Push Press",
-        duration: 25,
-        weight: 185,
-        reps: 8,
-        sets: 4
-      }
-    ]
-  },
-  {
-    day: new Date().setDate(new Date().getDate()-7),
-    exercises: [
-      {
-        type: "cardio",
-        name: "Running",
-        duration: 25,
-        distance: 4
-      }
-    ]
-  },
-  {
-    day: new Date().setDate(new Date().getDate()-6),
-    exercises: [
-      {
-        type: "resistance",
-        name: "Bench Press",
-        duration: 20,
-        weight: 285,
-        reps: 10,
-        sets: 4
-      }
-    ]
-  },
-  {
-    day: new Date().setDate(new Date().getDate()-5),
-    exercises: [
-      {
-        type: "resistance",
-        name: "Bench Press",
-        duration: 20,
-        weight: 300,
-        reps: 10,
-        sets: 4
-      }
-    ]
-  },
-  {
-    day: new Date().setDate(new Date().getDate()-4),
-    exercises: [
-      {
-        type: "resistance",
-        name: "Quad Press",
-        duration: 30,
-        weight: 300,
-        reps: 10,
-        sets: 4
-      }
-    ]
-  },
-  {
-    day: new Date().setDate(new Date().getDate()-3),
-    exercises: [
-      {
-        type: "resistance",
-        name: "Bench Press",
-        duration: 20,
-        weight: 300,
-        reps: 10,
-        sets: 4
-      }
-    ]
-  },
-  {
-    day: new Date().setDate(new Date().getDate()-2),
-    exercises: [
-      {
-        type: "resistance",
-        name: "Military Press",
-        duration: 20,
-        weight: 300,
-        reps: 10,
-        sets: 4
-      }
-    ]
-  },
-  {
-    day: new Date().setDate(new Date().getDate()-1),
-    exercises: [
-      {
-        type: "resistance",
-        name: "Bench",
-        duration: 30,
-        distance: 2
-      }
-    ]
-  }
+    {
+        userName: "TestUser3",
+        email: "Test3@Test.com",
+        pictureUrl: "",
+        fullName: "Test McTestface3",
+        stackOverflowId: "stackID",
+        codewarsId: "codewarsID",
+        gitHubId: "gitID",
+        level: 10,
+        langInterestTags: ["Javascript","PHP","React"]
+    },
+    {
+        userName: "TestUser3",
+        email: "Test2@Test.com",
+        pictureUrl: "",
+        fullName: "Test McTestface2",
+        stackOverflowId: "stackID",
+        codewarsId: "codewarsID",
+        gitHubId: "gitID",
+        isMentor:true,
+        mentorRating: 5,
+        level: 30,
+        langInterestTags: ["Javascript","PHP","React"]
+    }
 ];
-
-db.Workout.deleteMany({})
-  .then(() => db.Workout.collection.insertMany(workoutSeed))
-  .then(data => {
-    console.log(data.result.n + " records inserted!");
+async function seed(){
+    await db.User.deleteMany({})
+    
+    for(const user of userSeed){
+        await db.User.create(user);   
+        console.log("user created");       
+    }
+    await makeAndAssignProject();
     process.exit(0);
-  })
-  .catch(err => {
-    console.error(err);
-    process.exit(1);
-  });
+}
+
+seed();
+
+async function makeAndAssignProject(){
+    let user = await db.User.findOne({});    
+    let proj = {
+        owner: user._id,
+        name: "Test Proj1",
+        tags: ["javascript, react"]
+    };
+    await db.Project.create(proj);
+}

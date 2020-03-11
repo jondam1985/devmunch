@@ -1,5 +1,5 @@
-import model from '../models/Model';
-import { ObjectID } from 'mongodb';
+const model = require('../models/Model');
+const { ObjectID } = require('mongodb');
 
 function cb(err, res){
     if(err) throw new Error(err);
@@ -47,4 +47,4 @@ const Create = {
     }
 }
 
-export default Create
+module.exports = Create;

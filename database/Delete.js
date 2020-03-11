@@ -1,5 +1,5 @@
-import Model from '../models/Model';
-import { ObjectID } from 'mongodb';
+const Model = require('../models/Model');
+const { ObjectID } = require('mongodb') ;
 
 function cb(err, res){
     if(err) throw new Error(err);
@@ -48,4 +48,4 @@ const Delete = {
     }
 }
 
-export default Delete
+module.exports = Delete;
