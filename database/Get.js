@@ -1,6 +1,6 @@
-import model from '../models/Model';
-import { ObjectID } from 'mongodb';
-import {Model} from 'mongoose';
+const model = require('../models/Model');
+const { ObjectID } = require('mongodb');
+const {Model} = require('mongoose');
 
 
 function cb(err, res){
@@ -83,4 +83,4 @@ const Get =  {
     }
 }
 
-export default Get
+module.exports = Get;
