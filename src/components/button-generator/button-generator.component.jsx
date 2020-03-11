@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
 import NavButton from '../nav-button/NavButton.component';
 
-const ButtonGenerator = ({user}) => {
+const ButtonGenerator = () => {
 
-  
-  
-  
-  const generateBottonsForUser = ({user}) => {
+
+  const generateBottonsForUser = (user) => {
     const buttons = [
       {
         name: 'Home',
@@ -68,7 +66,7 @@ const ButtonGenerator = ({user}) => {
 
   return(
     <>
-      {generateBottonsForUser(user)}
+      {generateBottonsForUser('mentor')}
     </>
   )
 }

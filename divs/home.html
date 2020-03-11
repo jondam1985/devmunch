@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .popup{
+            position: fixed;
+            display: none;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        .popup.active{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .popup .mask{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 0, 0, 0.35);
+            z-index: -1;
+        }
+        .popup .popup-content{
+            padding: 15px;
+            max-width: 400px;
+            margin: 0 auto;
+            background: #fff;
+            z-index: 1;
+        }
+        .popup .popup-content .login-content{
+            display: none;
+        }
+        .popup .popup-content .login-content.active{
+            display: block;
+        }
+        .popup .popup-content .signup-content{
+            display: none;
+        }
+        .popup .popup-content .signup-content.active{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="popup" id="popup">
+    <div class="mask" id="mask"></div>
+    <div class="popup-content">
+        <div class="login-content active" id="login-content">
+            <div class="title">
+                Log in
+            </div>
+            <h2>
+                Log in  to your account
+            </h2>
+            <div class="img">
+                <img src="img/github.png" alt="">
+            </div>
+            <div class="sign-up">
+                Not a DebMunch member? <a href="" id="changeLoginContent">Sign up here</a>
+            </div>
+        </div>
+        <div class="signup-content" id="signup-content">
+            <div class="title">Sign up</div>
+            <h2>Sign up to your account</h2>
+            <form action="" class="form">
+                <div class="input-item">
+                    <input type="text" placeholder="name">
+                </div>
+                <div class="input-item">
+                    <input type="text" placeholder="Field of activity">
+                </div>
+                <div class="input-item">
+                    <input type="text" placeholder="Code wars optional">
+                </div>
+                <div class="input-item">
+                    <input type="text" placeholder="Tags of laguages of interest required">
+                </div>
+                <div class="tags">
+                    <div class="tag-item">
+                        <span class="close">x</span>
+                        <span class="name">php</span>
+                    </div>
+                    <div class="tag-item">
+                        <span class="close">x</span>
+                        <span class="name">html</span>
+                    </div>
+                    <div class="tag-item">
+                        <span class="close">x</span>
+                        <span class="name">css</span>
+                    </div>
+                </div>
+            </form>
+            <h2>
+                Do you want to be a mentor?
+            </h2>
+            <form action="" class="form">
+                <div class="input-item">
+                    <input type="text" placeholder="Stack required">
+                </div>
+                <div class="input-item">
+                    <input type="text" placeholder="Linkedin required">
+                </div>
+                <div class="input-item">
+                    <input type="text" placeholder="Stack required">
+                </div>
+            </form>
+
+            <button>
+                Sign Up with GitHub
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="header">
+    <div class="container">
+        <div class="header__row">
+            <h1>
+                DevMunch
+            </h1>
+            <p>
+                DevMunch
+            </p>
+            <button id="open">
+                Log in
+            </button>
+        </div>
+        <div class="info-block">
+            <div class="info-item">
+                <div class="img">
+                    <img src="img/github.png" alt="">
+                </div>
+                <div class="title">
+                    Lorem ipsum dolor sit amet
+                </div>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                </p>
+            </div>
+            <div class="info-item">
+                <div class="img">
+                    <img src="img/github.png" alt="">
+                </div>
+                <div class="title">
+                    Lorem ipsum dolor sit amet
+                </div>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                </p>
+            </div>
+            <div class="info-item">
+                <div class="img">
+                    <img src="img/github.png" alt="">
+                </div>
+                <div class="title">
+                    Lorem ipsum dolor sit amet
+                </div>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let mask = document.getElementById('mask');
+    let openBtn = document.getElementById('open');
+    let popup = document.getElementById('popup');
+    let change = document.getElementById('changeLoginContent');
+    let loginContent = document.getElementById('login-content');
+    let signUpContent = document.getElementById('signup-content');
+
+    mask.addEventListener('click', function () {
+        popup.classList.remove('active');
+    });
+    openBtn.addEventListener('click', function () {
+        popup.classList.add('active');
+    });
+
+    change.addEventListener('click', function (e) {
+        e.preventDefault();
+        loginContent.classList.remove('active');
+        signUpContent.classList.add('active');
+    })
+
+
+
+
+</script>
+</body>
+</html>
