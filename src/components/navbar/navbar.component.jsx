@@ -1,4 +1,5 @@
 import React from 'react';
+import Logo from '../logo/logo.component';
 import ButtonGenerator from '../button-generator/button-generator.component';
 
 const NavBar = () => {
@@ -6,7 +7,7 @@ const NavBar = () => {
   return(
     <div>
       <Logo />
-      <div className="button-list">
+      <div>
         <ButtonGenerator/>
       </div>
     </div>
