@@ -3,6 +3,11 @@ const path = require("path");
 const PORT = process.env.PORT || 3030;
 const app = express();
 const mongoose = require('mongoose');
+const apiRoutes = require('./controller/APIController');
+
+const bodyParser = require("body-parser");
+
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -25,6 +30,7 @@ mongoose.connect(process.env.MONGODB_URI || process.env.DEV_MONGODB || "mongodb:
 });
 
 //API routes
+app.use(apiRoutes);
 
 //Other server calls
 app.get("*", (req, res) => {
