@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
@@ -13,13 +13,10 @@ const badgeSchema = new Schema({
     description: String,
     graphic:{
         source: String
-    },
-    createdOn:{
-        type: Date,
-        default: Date.now()
     }    
-});
+},
+{timestamps: true});
 
-const Badge = mongoose.model("Project", badgeSchema);
+const Badge = mongoose.model("Badge", badgeSchema);
 
-export default Badge;
+module.exports = Badge;
