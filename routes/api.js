@@ -4,14 +4,32 @@ const call = express();
 
 
 //Get user's commit from GitHub
-call.get("/api/get-github-events/:username", (req, res) => {
+call.get("/api/get-github-commits/:username", (req, res) => {
     let usernmane = req.params.username;
     res.send(
-        axios.get(`https://api.github.com/users/${usernmane}/events`)
-            .then(function (response) {
-                return response.data;
-            })
-    )
+        axios.get(`https://api.github.com/users/${username}/repos`)
+            .then(response => {
+                let data = response.data;
+                let repos = data.map(item => item.name);
+                let urlArr = repos.map(item => `https://api.github.com/repos/${username}/${item}/contributors`);
+                let requests = urlArr.map(url => axios.get(url));
+                axios.all(requests)
+                    .then(
+                        axios.spread((...responses) => {
+                            let allData = responses.map(item => item.data);
+                            console.log(allData)
+                            let commits = 0;
+                            for (let i = 0; i < allData.length; i++) {
+                                for (let j = 0; j < allData[i].length; j++) {
+                                    if (allData[i][j].login === username) {
+                                        commits += allData[i][j].contributions;
+                                    }
+                                }
+                            }
+                            return commits
+                        })
+                    )
+            }))
 });
 
 call.get("/api/get-code-score/:username", (req, res) => {
