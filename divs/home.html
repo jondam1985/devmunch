@@ -6,47 +6,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style>
-        .popup{
-            position: fixed;
-            display: none;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-        }
-        .popup.active{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .popup .mask{
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 0, 0, 0.35);
-            z-index: -1;
-        }
-        .popup .popup-content{
-            padding: 15px;
-            max-width: 400px;
-            margin: 0 auto;
-            background: #fff;
-            z-index: 1;
-        }
-        .popup .popup-content .login-content{
-            display: none;
-        }
-        .popup .popup-content .login-content.active{
-            display: block;
-        }
-        .popup .popup-content .signup-content{
-            display: none;
-        }
-        .popup .popup-content .signup-content.active{
-            display: block;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="popup" id="popup">
@@ -57,7 +18,7 @@
                 Log in
             </div>
             <h2>
-                Log in  to your account
+                Log in to your account
             </h2>
             <div class="img">
                 <img src="img/github.png" alt="">
@@ -84,15 +45,62 @@
                 </div>
                 <div class="tags">
                     <div class="tag-item">
-                        <span class="close">x</span>
+                        <span class="close">
+                            <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.44661 2.99903L5.90752 5.45994C6.03083 5.58327 6.03083 5.78321 5.90752 5.90653C5.78419 6.02986 5.58423 6.02986 5.46092 5.90653L2.99999 3.44562L0.539085 5.90653C0.415757 6.02986 0.215812 6.02986 0.0924959 5.90653C-0.0308203 5.7832 -0.030832 5.58325 0.0924959 5.45994L2.55341 2.99903L0.0924959 0.53812C-0.030832 0.414793 -0.030832 0.214848 0.0924959 0.0915313C0.215824 -0.0317965 0.415769 -0.031785 0.539085 0.0915313L2.99999 2.55244L5.46089 0.0915313C5.58422 -0.0317965 5.78418 -0.031785 5.90749 0.0915313C6.03081 0.214859 6.03081 0.414804 5.90749 0.53812L3.44661 2.99903Z"
+      fill="#8C8C8C"/>
+</svg>
+                        </span>
                         <span class="name">php</span>
                     </div>
                     <div class="tag-item">
-                        <span class="close">x</span>
+                        <span class="close">
+                            <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.44661 2.99903L5.90752 5.45994C6.03083 5.58327 6.03083 5.78321 5.90752 5.90653C5.78419 6.02986 5.58423 6.02986 5.46092 5.90653L2.99999 3.44562L0.539085 5.90653C0.415757 6.02986 0.215812 6.02986 0.0924959 5.90653C-0.0308203 5.7832 -0.030832 5.58325 0.0924959 5.45994L2.55341 2.99903L0.0924959 0.53812C-0.030832 0.414793 -0.030832 0.214848 0.0924959 0.0915313C0.215824 -0.0317965 0.415769 -0.031785 0.539085 0.0915313L2.99999 2.55244L5.46089 0.0915313C5.58422 -0.0317965 5.78418 -0.031785 5.90749 0.0915313C6.03081 0.214859 6.03081 0.414804 5.90749 0.53812L3.44661 2.99903Z"
+      fill="#8C8C8C"/>
+</svg>
+
+                        </span>
                         <span class="name">html</span>
                     </div>
                     <div class="tag-item">
-                        <span class="close">x</span>
+                        <span class="close">
+                            <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.44661 2.99903L5.90752 5.45994C6.03083 5.58327 6.03083 5.78321 5.90752 5.90653C5.78419 6.02986 5.58423 6.02986 5.46092 5.90653L2.99999 3.44562L0.539085 5.90653C0.415757 6.02986 0.215812 6.02986 0.0924959 5.90653C-0.0308203 5.7832 -0.030832 5.58325 0.0924959 5.45994L2.55341 2.99903L0.0924959 0.53812C-0.030832 0.414793 -0.030832 0.214848 0.0924959 0.0915313C0.215824 -0.0317965 0.415769 -0.031785 0.539085 0.0915313L2.99999 2.55244L5.46089 0.0915313C5.58422 -0.0317965 5.78418 -0.031785 5.90749 0.0915313C6.03081 0.214859 6.03081 0.414804 5.90749 0.53812L3.44661 2.99903Z"
+      fill="#8C8C8C"/>
+</svg>
+
+                        </span>
+                        <span class="name">css</span>
+                    </div>
+                    <div class="tag-item">
+                        <span class="close">
+                            <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.44661 2.99903L5.90752 5.45994C6.03083 5.58327 6.03083 5.78321 5.90752 5.90653C5.78419 6.02986 5.58423 6.02986 5.46092 5.90653L2.99999 3.44562L0.539085 5.90653C0.415757 6.02986 0.215812 6.02986 0.0924959 5.90653C-0.0308203 5.7832 -0.030832 5.58325 0.0924959 5.45994L2.55341 2.99903L0.0924959 0.53812C-0.030832 0.414793 -0.030832 0.214848 0.0924959 0.0915313C0.215824 -0.0317965 0.415769 -0.031785 0.539085 0.0915313L2.99999 2.55244L5.46089 0.0915313C5.58422 -0.0317965 5.78418 -0.031785 5.90749 0.0915313C6.03081 0.214859 6.03081 0.414804 5.90749 0.53812L3.44661 2.99903Z"
+      fill="#8C8C8C"/>
+</svg>
+
+                        </span>
+                        <span class="name">css</span>
+                    </div>
+                    <div class="tag-item">
+                        <span class="close">
+                            <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.44661 2.99903L5.90752 5.45994C6.03083 5.58327 6.03083 5.78321 5.90752 5.90653C5.78419 6.02986 5.58423 6.02986 5.46092 5.90653L2.99999 3.44562L0.539085 5.90653C0.415757 6.02986 0.215812 6.02986 0.0924959 5.90653C-0.0308203 5.7832 -0.030832 5.58325 0.0924959 5.45994L2.55341 2.99903L0.0924959 0.53812C-0.030832 0.414793 -0.030832 0.214848 0.0924959 0.0915313C0.215824 -0.0317965 0.415769 -0.031785 0.539085 0.0915313L2.99999 2.55244L5.46089 0.0915313C5.58422 -0.0317965 5.78418 -0.031785 5.90749 0.0915313C6.03081 0.214859 6.03081 0.414804 5.90749 0.53812L3.44661 2.99903Z"
+      fill="#8C8C8C"/>
+</svg>
+
+                        </span>
+                        <span class="name">css</span>
+                    </div>
+                    <div class="tag-item">
+                        <span class="close">
+                            <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.44661 2.99903L5.90752 5.45994C6.03083 5.58327 6.03083 5.78321 5.90752 5.90653C5.78419 6.02986 5.58423 6.02986 5.46092 5.90653L2.99999 3.44562L0.539085 5.90653C0.415757 6.02986 0.215812 6.02986 0.0924959 5.90653C-0.0308203 5.7832 -0.030832 5.58325 0.0924959 5.45994L2.55341 2.99903L0.0924959 0.53812C-0.030832 0.414793 -0.030832 0.214848 0.0924959 0.0915313C0.215824 -0.0317965 0.415769 -0.031785 0.539085 0.0915313L2.99999 2.55244L5.46089 0.0915313C5.58422 -0.0317965 5.78418 -0.031785 5.90749 0.0915313C6.03081 0.214859 6.03081 0.414804 5.90749 0.53812L3.44661 2.99903Z"
+      fill="#8C8C8C"/>
+</svg>
+
+                        </span>
                         <span class="name">css</span>
                     </div>
                 </div>
@@ -120,22 +128,26 @@
 </div>
 
 <div class="header">
-    <div class="container">
-        <div class="header__row">
-            <h1>
-                DevMunch
-            </h1>
-            <p>
-                DevMunch
-            </p>
-            <button id="open">
-                Log in
-            </button>
+    <div class="header__row">
+        <div class="container">
+            <div class="info">
+                <h1>
+                    DevMunch
+                </h1>
+                <p>
+                    DevMunch
+                </p>
+                <button id="open">
+                    Log in
+                </button>
+            </div>
         </div>
+    </div>
+    <div class="container">
         <div class="info-block">
             <div class="info-item">
                 <div class="img">
-                    <img src="img/github.png" alt="">
+                    <img src="img/video-conference.png" alt="">
                 </div>
                 <div class="title">
                     Lorem ipsum dolor sit amet
@@ -157,7 +169,7 @@
             </div>
             <div class="info-item">
                 <div class="img">
-                    <img src="img/github.png" alt="">
+                    <img src="img/growth.png" alt="">
                 </div>
                 <div class="title">
                     Lorem ipsum dolor sit amet
@@ -179,6 +191,8 @@
 
     mask.addEventListener('click', function () {
         popup.classList.remove('active');
+        loginContent.classList.add('active');
+        signUpContent.classList.remove('active');
     });
     openBtn.addEventListener('click', function () {
         popup.classList.add('active');
@@ -189,9 +203,6 @@
         loginContent.classList.remove('active');
         signUpContent.classList.add('active');
     })
-
-
-
 
 </script>
 </body>
