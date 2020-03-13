@@ -1,7 +1,8 @@
 {
   "domain": "dev-r7z7egai.auth0.com",
-  "clientId": "Xab6rdQdpM43qjXsX2R1wTbcgPl9BZLE"
+  "clientId": "Xab6rdQdpM43qjXsX2R1wTbcgPl9BZLE",
+  "responseType":"code",
+  "response_type":"code"
 }
-
 
 

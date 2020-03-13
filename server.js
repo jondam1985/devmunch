@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const API = require("./routes");
 const PORT = process.env.PORT || 3030;
 const app = express();
 const mongoose = require('mongoose');
@@ -31,6 +32,7 @@ mongoose.connect(process.env.MONGODB_URI || process.env.DEV_MONGODB || "mongodb:
 
 //API routes
 app.use(apiRoutes);
+
 
 //Other server calls
 app.get("*", (req, res) => {
