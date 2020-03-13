@@ -6,8 +6,7 @@ import {useAuth0} from '../../react-auth0-spa.js';
 const Login = () => {
 
   const {isAuthenticated,loginWithRedirect} = useAuth0();
-
-
+  
   return(
     <>
       <div className="popup" id="popup">
