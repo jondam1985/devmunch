@@ -4,9 +4,7 @@ import { useAuth0 } from '../../react-auth0-spa';
 const Login = () => {
 
   const {isAuthenticated,loginWithRedirect} = useAuth0();
-
-
-
+  
   return(
     <>
       { 

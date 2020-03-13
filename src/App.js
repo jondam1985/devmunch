@@ -16,68 +16,31 @@ import { useAuth0 } from "./react-auth0-spa";
 
 
 function App() {
-  const { handleRedirectCallback,loading , isAuthenticated , user, getTokenSilently,getIdTokenClaims} = useAuth0();
+  const { loading , isAuthenticated , user, getTokenSilently,getIdTokenClaims} = useAuth0(); 
 
-  const getTokenSilently_promise = async () => {
-    await new Promise(async (res,rej)=>{
-      const resp = await getTokenSilently()
-      if (rej) {
-        rej('what the hell happened?')
-      } 
-      if (res) {
-        console.log("getTokenSilently:",resp)
-        res()
-      }
-    })
-  }
-
-  const getIdTokenClaims_promise = async () => {
-    await new Promise(async (res,rej)=>{
-      const resp = await getIdTokenClaims()
-      if (rej) {
-        rej('what the hell happened?')
-      } 
-      if (res) {
-        console.log("getIdTokenClaims:",resp)
-        res()
-      }
-    })
-  }
-
-  const handleRedirectCallback_promise = async () => {
-    await new Promise(async (res,rej)=>{
-      await handleRedirectCallback()
-      if (rej) {
-        rej('what the hell happened?')
-      } else {
-        res()
-      }
-    })
-  }
   
-  
-
+  //why is this code just floating here?
   if (loading) {
     return <div>Loading...</div>;
   }
-
-
-
-  console.log(isAuthenticated)
-  
-  
-  
-  
+  //ditto
   if (isAuthenticated) {
-    console.log(user)
-    getTokenSilently_promise()
-    getIdTokenClaims_promise()
+    console.log("user:",user)
+    //getToken()
+    
+    getTokenSilently()
+    .then(token => {
+      console.log(token);
+    });
+
+    getIdTokenClaims()
+    .then(data =>{
+      console.log(data);
+    });
   }
-
-
+  
   return (
     <div className="App">
-
       {
         isAuthenticated ? 
           (
@@ -85,7 +48,8 @@ function App() {
               <Router history={history}>
                 <Page >
                   <Switch>
-                    <Route exact path='/' component={Dashboard}  />
+                    <Route exact path="/" component={Login}/>
+                    <Route exact path='/dashboard' component={Dashboard}  />
                     <PrivateRoute path='/profile' component={Profile}  />
                   </Switch>
                 </Page> 

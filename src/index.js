@@ -19,19 +19,16 @@ const onRedirectCallback = appState => {
   history.push(
     appState && appState.targetUrl
       ? appState.targetUrl
-      : window.location.pathname
+      : "/dashboard"
   );
 };
-
-
-
 
 ReactDOM.render(
     <Provider store={store}>
       <Auth0Provider
         domain={config.domain}
         client_id={config.clientId}
-        redirect_uri={window.location.origin}
+        redirect_uri={'http://localhost:3000/dashboard'}
         onRedirectCallback={onRedirectCallback}
       >
         <App />
