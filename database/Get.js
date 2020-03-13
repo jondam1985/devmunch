@@ -21,7 +21,12 @@ const Get =  {
     UserById: (id) => {
         model.User.findById(id, cb);
     },
-
+    /**
+     *@param {String} username username to check if exists (github); 
+     */
+    UserExists: (username) => {
+        model.User.exists({userName:username},cb);
+    },
     /**
      * finds all mentors of the given user
      * @param {ObjectID} id user Id
