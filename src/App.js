@@ -48,7 +48,7 @@ function App() {
               <Router history={history}>
                 <Page >
                   <Switch>
-                    <Route exact path="/" component={Login}/>
+                    <Route exact path={isAuthenticated?'/dashboard':'/'} component={Login}/>
                     <Route exact path='/dashboard' component={Dashboard}  />
                     <PrivateRoute path='/profile' component={Profile}  />
                   </Switch>

@@ -30,6 +30,7 @@ ReactDOM.render(
         client_id={config.clientId}
         redirect_uri={'http://localhost:3000/dashboard'}
         onRedirectCallback={onRedirectCallback}
+        returTo='/'
       >
         <App />
       </Auth0Provider>
