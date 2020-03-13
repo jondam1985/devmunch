@@ -6,15 +6,15 @@ import MentorContainer from '../../components/mentor-container/mentor-container.
 const MyMentors = () => {
   return(
     <>
-    <Panel />
-    <div className="content">
-      <Header title="My-Mentors" />
-        <div className="projects">
+      <Panel />
+        <div className="content">
+          <Header title="My-Mentors" />
+          <div className="projects">
           {/* list of mentors gets generated through this component.
               it needs to be passed recieved by a call to the server
               and to be passed down as props
           */}
-            <MentorContainer />
+          <MentorContainer />
         </div>
       </div>
     </>

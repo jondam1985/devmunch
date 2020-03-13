@@ -678,6 +678,8 @@ a {
   min-width: 230px; }
 
 .dashboard .panel .logo {
+  color: white;
+  font-size: 2em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -706,10 +708,60 @@ a {
   -ms-flex-pack: center;
   justify-content: center;
   width: 100%;
-  background: #4687E8;
+  /* background: #4687E8; */
   border-radius: 30px;
   height: 46px;
   margin: 20px 0 10px; }
+
+  .dashboard .panel .home:hover{
+    background: #4687E8;
+  }
+
+  .hedaer-name-arrow{
+    display: flex;
+    position: relative;
+  }
+
+  .drop-down{
+    background: #ffffff;
+    position: absolute;
+    top: 20px;
+    width: 130px;
+    display: none;
+    box-shadow: 0 0 5px -2px black;
+    border-radius: 5px;
+    padding: 5px;
+  }
+  
+  .drop-down.open{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .drop-down-button{
+    padding: 10px;
+    margin: 4px;
+    border-radius: 30px;
+    background: rgb(57, 65, 148);
+    min-width: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+
+  .drop-down-button:hover{
+    background-color: #4687E8;
+  }
+
+  .panel-button-active{
+    background: #4687E8;
+    border-radius: 30px;
+    margin: 0 7px;
+  }
+
 
 .dashboard .panel .home img {
   margin-right: 20px; }

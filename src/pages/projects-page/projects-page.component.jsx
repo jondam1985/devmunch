@@ -44,13 +44,12 @@ const ProjectsPage = () => {
 
   return(
     <>
-      <Panel/>
+    <Panel />
       <div className="content">
-        <Header title="Projects" />
-        <div className="projects">
-          <ProjectContainer />
-            
-        </div>
+      <Header title="Projects" />
+      <div className="projects">
+        <ProjectContainer />
+      </div>
       </div>
     </>
   )

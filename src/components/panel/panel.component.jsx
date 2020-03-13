@@ -1,17 +1,24 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {Link} from 'react-router-dom'
 
 const Panel = () => {
+
+  useEffect(()=>{
+    if (
+      document.querySelector(`.${window.location.pathname.substring(1)}-button`)
+    ){
+      document.querySelector(`.${window.location.pathname.substring(1)}-button`).classList.add('panel-button-active')
+    }
+  },[])
+
   return (
     <div className="panel">
             <div className="logo">
                 DevMunch
             </div>
-            <div className="home">
+            <div className="home dashboard-button">
                 <img src={require("../../style/img/home-run.png")} alt="" />
-                {/* <div > */}
                   <Link className="title" to='/dashboard' >Dashboard</Link>
-                {/* </div> */}
             </div>
             <nav>
                 <div className="nav-item">
@@ -22,8 +29,8 @@ const Panel = () => {
                         </div>
                     </div>
                     <div className="sub-links">
-                    <Link to='/mymentors' >My Mentors</Link>
-                      <Link to='/mentorslist' >Mentors list</Link>
+                      <Link className="mymentors-button" to='/mymentors' >My Mentors</Link>
+                      <Link className="mentorslist-button" to='/mentorslist' >Mentors list</Link>
                     </div>
                 </div>
                 <div className="nav-item">
@@ -34,8 +41,8 @@ const Panel = () => {
                         </div>
                     </div>
                     <div className="sub-links">
-                      <Link to='/project' >Project</Link>
-                      <Link to='/enteesprojects' >Mentees Projects</Link>
+                      <Link className="project-button" to='/project' >Project</Link>
+                      <Link className="enteesprojects-button" to='/enteesprojects' >Mentees Projects</Link>
                     </div>
                 </div>
             </nav>
