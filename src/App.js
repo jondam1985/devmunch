@@ -1,12 +1,15 @@
 import React,{useState,useEffect} from 'react';
 import './App.css';
-import Page from './components/page/page.component';
+import './style/style.css';
+
 import {Switch,Route,Router} from 'react-router-dom';
 
 import Login from './components/login/login-copmonent';
 
-import Dashboard from './pages/dashboard-page/dashboard.component'
-import Profile from './components/profile';
+import Dashboard from './pages/dashboard-page/dashboard.component';
+import MyMentors from './pages/my-mentors-page/my-mentors.component';
+import MentorsList from './pages/mentors-list-page/mentors-list.component';
+import Project from './pages/projects-page/projects-page.component';
 
 import history from "./utils/history";
 
@@ -16,86 +19,36 @@ import { useAuth0 } from "./react-auth0-spa";
 
 
 function App() {
-  const { handleRedirectCallback,loading , isAuthenticated , user, getTokenSilently,getIdTokenClaims} = useAuth0();
-
-  const getTokenSilently_promise = async () => {
-    await new Promise(async (res,rej)=>{
-      const resp = await getTokenSilently()
-      if (rej) {
-        rej('what the hell happened?')
-      } 
-      if (res) {
-        console.log("getTokenSilently:",resp)
-        res()
-      }
-    })
-  }
-
-  const getIdTokenClaims_promise = async () => {
-    await new Promise(async (res,rej)=>{
-      const resp = await getIdTokenClaims()
-      if (rej) {
-        rej('what the hell happened?')
-      } 
-      if (res) {
-        console.log("getIdTokenClaims:",resp)
-        res()
-      }
-    })
-  }
-
-  const handleRedirectCallback_promise = async () => {
-    await new Promise(async (res,rej)=>{
-      await handleRedirectCallback()
-      if (rej) {
-        rej('what the hell happened?')
-      } else {
-        res()
-      }
-    })
-  }
-  
-  
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-
-
-  console.log(isAuthenticated)
-  
-  
-  
-  
-  if (isAuthenticated) {
-    console.log(user)
-    getTokenSilently_promise()
-    getIdTokenClaims_promise()
-  }
+  const { loading , isAuthenticated , user, getTokenSilently,getIdTokenClaims} = useAuth0();
 
 
   return (
-    <div className="App">
-
+    <>
       {
-        isAuthenticated ? 
+        true ? 
           (
             <>
               <Router history={history}>
-                <Page >
+                <div className="dashboard">
                   <Switch>
-                    <Route exact path='/' component={Dashboard}  />
-                    <PrivateRoute path='/profile' component={Profile}  />
+                  <Route exact path='/' component={Login}  />
+                    <Route exact path='/dashboard' component={Dashboard}  />
+                    <Route exact path='/mymentors' component={MyMentors}  />
+                    <Route exact path='/mentorslist' component={MentorsList}  />
+                    <Route exact path='/project' component={Project}  />
+                    
+                    {/* DONT DELETE THIS */}
+                    {/* <PrivateRoute exact path='/dashboard' component={Dashboard}  /> */}
+
                   </Switch>
-                </Page> 
+                </div>
               </Router>
             </>
           )
         :
-        <Login  />
+        <Login />
       }
-    </div>  
+    </>
   );
 }
 
