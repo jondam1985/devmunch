@@ -6,16 +6,16 @@ import UserAchivements from '../../components/user-achievements/user-achievement
 const Dashboard = () => {
   const [dashboardData , setDashbaordData] = useState(null)
 
-  useEffect(()=>{
+  // useEffect(()=>{
 
-    fetch('/dashboarddata')
-    .then(response=>{
-      return response.json()
-    })
-    .then(response=>{
-      setDashbaordData(response);
-    })
-  },[])
+  //   fetch('/dashboarddata')
+  //   .then(response=>{
+  //     return response.json()
+  //   })
+  //   .then(response=>{
+  //     setDashbaordData(response);
+  //   })
+  // },[])
 
   return (
     <div>
@@ -27,7 +27,9 @@ const Dashboard = () => {
             <UserAchivements achievments={dashboardData.achivements} />
           </>
         ) :
-        null
+        <>
+          there is nothing here on the dashboard page yet...
+        </>
       }
     </div>
   )

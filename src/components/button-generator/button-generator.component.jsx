@@ -1,17 +1,22 @@
 import React, { useEffect } from 'react';
 import NavButton from '../nav-button/NavButton.component';
 
-const ButtonGenerator = ({user}) => {
+const ButtonGenerator = () => {
 
-  
-  
-  
-  const generateBottonsForUser = ({user}) => {
+
+  const generateBottonsForUser = (user) => {
     const buttons = [
       {
         name: 'Home',
         icon: 'url to icon',
-        mentee: true
+        mentee: true,
+        to:'/'
+      },
+      {
+        name: 'Profile',
+        icon: 'url to icon',
+        mentee: true,
+        to:'/profile'
       },
       {
         name: 'Mentors',
@@ -49,7 +54,7 @@ const ButtonGenerator = ({user}) => {
       
       return buttons.map((button,index)=>{
         return (
-          <NavButton key={index} name={button.name} icon={button.icon} />
+          <NavButton to={button.to} key={index} name={button.name} icon={button.icon} />
         )
       })
 
@@ -59,7 +64,7 @@ const ButtonGenerator = ({user}) => {
         return button.mentee === true
       }).map((button,index)=>{
         return (
-          <NavButton key={index} name={button.name} icon={button.icon} />
+          <NavButton to={button.to} key={index} name={button.name} icon={button.icon} />
         )
       })
     }
@@ -68,7 +73,7 @@ const ButtonGenerator = ({user}) => {
 
   return(
     <>
-      {generateBottonsForUser(user)}
+      {generateBottonsForUser('mentor')}
     </>
   )
 }

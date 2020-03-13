@@ -8,3 +8,5 @@ const UserBadges = (badges) => {
     </div>
   )
 }
+
+export default UserBadges
