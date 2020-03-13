@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react';
 import './App.css';
 import './style/style.css';
 
-import {Switch,Route,Router} from 'react-router-dom';
+import {Switch,Router} from 'react-router-dom';
 
 import Login from './components/login/login-copmonent';
 
@@ -19,27 +19,28 @@ import { useAuth0 } from "./react-auth0-spa";
 
 
 function App() {
-  const { loading , isAuthenticated , user, getTokenSilently,getIdTokenClaims} = useAuth0();
+  const { loading , isAuthenticated} = useAuth0();
 
+  if(loading){
+    return(
+      <div>Loading...</div>
+    )
+  }
 
   return (
     <>
       {
-        true ? 
+        isAuthenticated ? 
           (
             <>
               <Router history={history}>
+                {history.push('/dashboard')}
                 <div className="dashboard">
                   <Switch>
-                  <Route exact path='/' component={Login}  />
-                    <Route exact path='/dashboard' component={Dashboard}  />
-                    <Route exact path='/mymentors' component={MyMentors}  />
-                    <Route exact path='/mentorslist' component={MentorsList}  />
-                    <Route exact path='/project' component={Project}  />
-                    
-                    {/* DONT DELETE THIS */}
-                    {/* <PrivateRoute exact path='/dashboard' component={Dashboard}  /> */}
-
+                    <PrivateRoute exact path='/dashboard' component={Dashboard}  />
+                    <PrivateRoute exact path='/mymentors' component={MyMentors}  />
+                    <PrivateRoute exact path='/mentorslist' component={MentorsList}  />
+                    <PrivateRoute exact path='/project' component={Project}  />
                   </Switch>
                 </div>
               </Router>
