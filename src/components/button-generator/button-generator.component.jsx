@@ -1,17 +1,20 @@
 import React, { useEffect } from 'react';
-import NavButton from '../nav-button/NavButton.component';
+import { Link } from 'react-router-dom';
 
-const ButtonGenerator = ({user}) => {
-
-  
-  
-  
-  const generateBottonsForUser = ({user}) => {
+const ButtonGenerator = () => {
+  const generateBottonsForUser = (user) => {
     const buttons = [
       {
         name: 'Home',
         icon: 'url to icon',
-        mentee: true
+        mentee: true,
+        to:'/'
+      },
+      {
+        name: 'Profile',
+        icon: 'url to icon',
+        mentee: true,
+        to:'/profile'
       },
       {
         name: 'Mentors',
@@ -22,54 +25,46 @@ const ButtonGenerator = ({user}) => {
         name: 'Projects',
         icon: 'url to icon',
         mentee: false
-      },
-      {
-        name: 'Orders',
-        icon: 'url to icon',
-        mentee: false
-      },
-      {
-        name: 'Assitance',
-        icon: 'url to icon',
-        mentee: true
-      },
-      {
-        name: 'Settings',
-        icon: 'url to icon',
-        mentee: true
-      },
-      {
-        name: 'Log Out',
-        icon: 'url to icon',
-        mentee: true
       }
     ]
 
     if (user === 'mentor') {
-      
-      return buttons.map((button,index)=>{
-        return (
-          <NavButton key={index} name={button.name} icon={button.icon} />
-        )
-      })
-
-    } else {
-
-      return buttons.filter((button)=>{
-        return button.mentee === true
-      }).map((button,index)=>{
-        return (
-          <NavButton key={index} name={button.name} icon={button.icon} />
-        )
-      })
-    }
+          return (
+            <>
+              <div className="nav-item">
+                    <div className="main">
+                        <img src="img/multiple-users.png" alt="" />
+                        <div className="title">
+                            Mentors
+                        </div>
+                    </div>
+                    <div className="sub-links">
+                      <button><Link to="/mymentors" >My mentors</Link></button>
+                      <button><Link to="/mentorslist" >Mentors list</Link></button>
+                    </div>
+                </div>
+                <div className="nav-item">
+                    <div className="main">
+                        <img src="img/start-up.png" alt="" />
+                        <div className="title">
+                            My projects
+                        </div>
+                    </div>
+                    <div className="sub-links">
+                        <button><Link to="/project" >Project</Link></button>
+                        <button><Link to="/menteesproject" >Mentees Projects</Link></button>
+                    </div>
+                </div>
+              </>
+            )
+    } 
 
   }
 
   return(
-    <>
-      {generateBottonsForUser(user)}
-    </>
+        <nav>
+          {generateBottonsForUser('mentor')}
+        </nav>
   )
 }
 
