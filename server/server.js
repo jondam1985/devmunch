@@ -8,11 +8,9 @@ const apiRoutes = require('../controller/APIController');
 
 const bodyParser = require("body-parser");
 
-app.use(bodyParser.urlencoded({ extended: true }));
-
 //Middleware
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 //Static assets
 
@@ -30,10 +28,10 @@ mongoose.connect(process.env.MONGODB_URI || process.env.DEV_MONGODB || "mongodb:
     console.log("connected to: " + (process.env.MONGODB_URI?process.env.MONGODB_URI: process.env.DEV_MONGODB ? process.DEV_MONGODB:"localhost"));
 });
 
-//API routes
+//internal API routes
 app.use(apiRoutes);
+//external API routes
 app.use(API);
-
 
 //Other server calls
 app.get("*", (req, res) => {

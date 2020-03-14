@@ -34,17 +34,17 @@ function App() {
       gitHubId: user.nickname
     
     }; 
+    console.log(user);
 
     const settings = {
-      method: 'POST',
-      mode: "no-cors",
+      method: 'POST',      
       headers:{
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(userData)
     }
 
-    const url = "https://localhost:3000/api/signup"
+    const url = "/api/signup"
 
     fetch(url,settings)
     .then((resp)=>{
