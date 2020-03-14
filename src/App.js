@@ -60,7 +60,7 @@ function App() {
     )
   }
   
-
+  
   return (
     <>
       {
@@ -77,8 +77,7 @@ function App() {
                     <PrivateRoute exact path='/dashboard' component={Dashboard}  />
                     <PrivateRoute exact path='/mymentors' component={MyMentors}  />
                     <PrivateRoute exact path='/mentorslist' component={MentorsList}  />
-                    <PrivateRoute exact path='/project' component={Project}  />
-                    
+                    <PrivateRoute exact path='/project' component={Project}  />                    
                     <PrivateRoute exact path='/help' component={Help}  />
                     <PrivateRoute exact path='/settings' component={Settings}  />
                   </Switch>

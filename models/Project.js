@@ -12,6 +12,7 @@ const projectSchema = new Schema({
         type: String,
         required: true
     },
+    description: String,
     externalLink: String,    
     collaborators:[{type: ObjectID, ref:'User'}],
     comments:[{
