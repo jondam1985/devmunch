@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useEffect} from 'react';
 import './App.css';
 import './style/style.css';
 
@@ -11,7 +11,6 @@ import MyMentors from './pages/my-mentors-page/my-mentors.component';
 import MentorsList from './pages/mentors-list-page/mentors-list.component';
 import Project from './pages/projects-page/projects-page.component';
 
-// import Panel from './components/panel/panel.component';
 import Settings from './pages/settings-page/settings.component';
 import Help from './pages/help-page/help.component';
 
@@ -20,10 +19,40 @@ import history from "./utils/history";
 import PrivateRoute from './components/PrivateRoute';
 import { useAuth0 } from "./react-auth0-spa";
 
-
+import {connect} from 'react-redux'
 
 function App() {
   const { loading , isAuthenticated,user} = useAuth0();
+
+  const sendUserDataToServer = () => {
+
+    const userData = {
+      userName: user.nickname,
+      email: user.email,
+      pictureUrl: user.picture,
+      fullName: user.name,
+      gitHubId: user.nickname
+    
+    }; 
+
+    const settings = {
+      method: 'POST',
+      mode: "no-cors",
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userData)
+    }
+
+    const url = "https://localhost:3000/api/signup"
+
+    fetch(url,settings)
+    .then((resp)=>{
+      console.log(resp)
+    })
+    .catch(err=>console.log(err))
+
+  }
 
   if(loading){
     return(
@@ -31,12 +60,16 @@ function App() {
     )
   }
   
+  
   return (
     <>
       {
         isAuthenticated ? 
           (
             <>
+            {
+              sendUserDataToServer()
+            }
               <Router history={history}>
                 {history.push('/dashboard')}
                 <div className="dashboard">
@@ -59,4 +92,18 @@ function App() {
   );
 }
 
-export default App;
+
+// const mapStateToProps = state => {
+//   return{
+
+//   }
+// }
+
+const mapDispatchToProps = dispatch => {
+
+  return {
+    x:"x"
+  }
+}
+
+export default connect(null,mapDispatchToProps)(App);

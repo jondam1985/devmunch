@@ -89,7 +89,7 @@ const userSchema = new Schema(
   {timestamps: true}
 );
 
-userSchema.pre('findOnAndUpdate',()=>{
+userSchema.pre('findOneAndUpdate',()=>{
     this.set({ lastUpdated: Date.now() });
 })
 

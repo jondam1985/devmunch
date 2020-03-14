@@ -20,6 +20,6 @@ const achievementSchema = new Schema({
     }    
 });
 
-const Achievment = mongoose.model("Project", achievementSchema);
+const Achievment = mongoose.model("Achievement", achievementSchema);
 
 module.exports = Achievment;
