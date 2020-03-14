@@ -1,10 +1,10 @@
 const express = require("express");
 const path = require("path");
-const API = require("./routes");
-const PORT = process.env.PORT || 3030;
+const API = require("../routes/api");
+const PORT = process.env.PORT || 8080;
 const app = express();
 const mongoose = require('mongoose');
-const apiRoutes = require('./controller/APIController');
+const apiRoutes = require('../controller/APIController');
 
 const bodyParser = require("body-parser");
 
@@ -17,7 +17,7 @@ app.use(express.json());
 //Static assets
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
+  app.use(express.static("../client/build"));
 }
 
 //db connect
@@ -32,11 +32,12 @@ mongoose.connect(process.env.MONGODB_URI || process.env.DEV_MONGODB || "mongodb:
 
 //API routes
 app.use(apiRoutes);
+app.use(API);
 
 
 //Other server calls
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
 app.listen(PORT, () => {

@@ -1,6 +1,6 @@
 const axios = require("axios");
 const express = require("express");
-const call = express();
+const call = express.Router();
 
 
 //Get user's commit from GitHub
@@ -73,4 +73,6 @@ call.get("/api/get-stack-rep/:userid", (req, res) => {
                 return reputation;
             })
     )
-})
+});
+
+module.exports = call;
