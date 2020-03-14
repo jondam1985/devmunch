@@ -35,8 +35,7 @@ projectSchema.pre('findOneAndUpdate',() =>{
 });
 
 projectSchema.post('save',(doc)=>{
-    console.log("i'm updating");
-    console.log(doc.owner);    
+     
     User.findByIdAndUpdate(doc.owner,{$push:{
         projects: doc._id
     }},(err,res)=>{

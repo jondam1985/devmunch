@@ -85,6 +85,15 @@ const Get =  {
             if(err) throw new Error(err);
             return res.projects;
         });
+    },
+
+    /**
+     * find a project by its id
+     * @param {ObjectID} id project id
+     * @return {Model} project
+     */
+    ProjectById: (id) =>{
+        model.Project.findById(id, cb);
     }
 }
 
