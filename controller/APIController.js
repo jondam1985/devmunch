@@ -144,8 +144,10 @@ apiRoutes.post("/api/project/:id/:userid/comment", checkJwt,
         let projId = req.params.id;
         let userId = req.params.userid;
         let comment = req.body.comment;
-        let dbRes = await db.Update.AddCommentToProject(projId, userId, comment)
-    })
+        let dbRes = await db.Update.AddCommentToProject(projId, userId, comment);
+        res.json(dbRes);
+    }
+);
 
 
 //delete user by id
