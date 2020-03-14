@@ -5,6 +5,9 @@ const PORT = process.env.PORT || 8080;
 const app = express();
 const mongoose = require('mongoose');
 const apiRoutes = require('../controller/APIController');
+const {resolve} = require('path');
+const cors = require('cors');
+require('dotenv').config({path: resolve(__dirname,"../.env")});
 
 const bodyParser = require("body-parser");
 
@@ -25,9 +28,10 @@ mongoose.connect(process.env.MONGODB_URI || process.env.DEV_MONGODB || "mongodb:
   useUnifiedTopology: true 
 },(err)=>{
     if(err) {throw new Error(err)};
-    console.log("connected to: " + (process.env.MONGODB_URI?process.env.MONGODB_URI: process.env.DEV_MONGODB ? process.DEV_MONGODB:"localhost"));
+    console.log("connected to: " + (process.env.MONGODB_URI?process.env.MONGODB_URI: process.env.DEV_MONGODB ? process.env.DEV_MONGODB:"localhost"));
 });
 
+app.use(cors());
 //internal API routes
 app.use(apiRoutes);
 //external API routes

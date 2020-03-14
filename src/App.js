@@ -34,7 +34,6 @@ function App() {
       gitHubId: user.nickname
     
     }; 
-    console.log(user);
 
     const settings = {
       method: 'POST',      
@@ -47,8 +46,10 @@ function App() {
     const url = "/api/signup"
 
     fetch(url,settings)
-    .then((resp)=>{
-      console.log(resp)
+    .then((resp)=>
+      resp.json()
+    ).then(data =>{
+      console.log(data);
     })
     .catch(err=>console.log(err))
 

@@ -8,10 +8,12 @@ const checkJwt = require('./jwtAuth');
 apiRoutes.post("/api/signup",
     async (req,res)=>{
 
-        console.log(req.body);
         let userName = req.body.userName;
-        if(db.Get.UserExists(userName)){
-            res.write("User already exists");
+        let exists = await db.Get.UserExists(userName);
+        
+        if(exists){
+            console.log("user already exists");
+            res.json({message:"User already exists"});
         }else{
             let newUser = req.body;
 
@@ -24,9 +26,11 @@ apiRoutes.post("/api/signup",
                 langInterestTags: newUser.Tags || []
             };
 
-            let newUserId = db.Create.User(user);
+            let newUserId = await db.Create.User(user);
+            console.log("new user created");
+            console.log(newUserId);
             //todo: add better error handling
-            (newUserId)? res.json(newUserId):res.write("error");
+            (newUserId)? res.json(newUserId):res.json({message:"error"});
         }
     }
 );
@@ -59,7 +63,7 @@ apiRoutes.get("/api/user/:id",checkJwt,
         if(user != null){
             res.json(user);
         }else{
-            res.write("User does not exist");
+            res.json({message:"User does not exist"});
         }
     }
 );

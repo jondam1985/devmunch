@@ -1,9 +1,18 @@
 const Model = require('../models/Model');
 const { ObjectID } = require('mongodb') ;
-
-function cb(err, res){
-    if(err) throw new Error(err);
-    return res;
+/**
+ * wraps DB calls in try catch for error handling
+ * usage: errorWrapper(() => Model.Get.User(params))
+ * @param {*} func 
+ * @returns {*} result of func if it does not error out
+ */
+const errorWrapper = async (func) =>{
+    try{
+        let res = await func();
+        return res;
+    }catch(err){
+        console.log(err);
+    }
 }
 /**
  * Collection of Delete methods from the database
@@ -15,8 +24,8 @@ const Delete = {
      * @param {ObjectID} id id of user
      * 
      */
-    UserById: (id) => {
-        Model.User.findByIdAndDelete(id, cb);
+    UserById: async (id) => {
+        return errorWrapper(() => Model.User.findByIdAndDelete(ObjectID(id)));
     },
 
     /**
@@ -24,8 +33,8 @@ const Delete = {
      * @param {ObjectID} id id of user
      * 
      */
-    BadgeById: (id) => {
-        Model.Badge.findByIdAndDelete(id, cb);
+    BadgeById: async (id) => {
+       return errorWrapper(() => Model.Badge.findByIdAndDelete(ObjectID(id)));
     },
 
     /**
@@ -33,9 +42,8 @@ const Delete = {
      * @param {ObjectID} id id of user
      * 
      */
-    AchievementById: (id) => {
-        
-      Model.Achievement.findByIdAndDelete(id, cb);        
+    AchievementById: async (id) => {
+        return errorWrapper(() => Model.Achievement.findByIdAndDelete(ObjectID(id)));        
     },
 
     /**
@@ -43,8 +51,8 @@ const Delete = {
      * @param {ObjectID} id id of user
      * 
      */
-    ProjectById: (id) => {
-        Model.Project.findByIdAndDelete(id, cb);
+    ProjectById: async (id) => {
+       return errorWrapper(() => Model.Project.findByIdAndDelete(ObjectID(id)));
     }
 }
 
