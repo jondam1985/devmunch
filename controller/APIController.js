@@ -4,6 +4,7 @@ const apiRoutes = express.Router();
 
 const checkJwt = require('./jwtAuth');
 
+//new user signup
 apiRoutes.post("/api/singup",
     async (req,res)=>{
         let userName = req.body.userName;
@@ -18,7 +19,7 @@ apiRoutes.post("/api/singup",
                 pictureUrl: newUser.pictureUrl,
                 fullName: newUser.fullName,
                 gitHubId: newUser.userName,
-                langInterestTags: newUser.Tags
+                langInterestTags: newUser.Tags || []
             };
 
             let newUserId = db.Create.User(user);
@@ -76,6 +77,15 @@ apiRoutes.get("/api/project/:id", checkJwt,
         let projId = req.params.id;
         let project = await db.Get.ProjectById(id);
         res.json(project);
+    }
+);
+
+//get mentor by user id
+apiRoutes.get("/api/user/:id/mentor", checkJwt,
+    async (req, res) => {
+        let userId = req.params.id;
+        let mentor = await db.Get.MentorsBuUserId(id);
+        res.json(mentor);
     }
 );
 

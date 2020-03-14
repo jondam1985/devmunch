@@ -17,7 +17,7 @@ const checkJwt = jwt({
   }),
 
   // Validate the audience and the issuer.
-  audience: 'YOUR_API_IDENTIFIER',
+  audience: 'https://dev-r7z7egai.auth0.com/api/v2/',
   issuer: `https://dev-r7z7egai.auth0.com/`,
   algorithms: ['RS256']
 });

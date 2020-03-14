@@ -19,7 +19,7 @@ import history from "./utils/history";
 import PrivateRoute from './components/PrivateRoute';
 import { useAuth0 } from "./react-auth0-spa";
 
-
+import {connect} from 'react-redux'
 
 function App() {
   const { loading , isAuthenticated,user} = useAuth0();
@@ -32,6 +32,7 @@ function App() {
       pictureUrl: user.picture,
       fullName: user.name,
       gitHubId: user.nickname
+    
     }; 
 
     const settings = {
@@ -43,7 +44,7 @@ function App() {
       body: JSON.stringify(userData)
     }
 
-    const url = "https://localhost:3030/api/signup"
+    const url = "https://localhost:3000/api/signup"
 
     fetch(url,settings)
     .then((resp)=>{
@@ -58,7 +59,6 @@ function App() {
       <div>Loading...</div>
     )
   }
-
   
 
   return (
@@ -93,4 +93,18 @@ function App() {
   );
 }
 
-export default App;
+
+// const mapStateToProps = state => {
+//   return{
+
+//   }
+// }
+
+const mapDispatchToProps = dispatch => {
+
+  return {
+    x:"x"
+  }
+}
+
+export default connect(null,mapDispatchToProps)(App);
