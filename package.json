@@ -5,6 +5,7 @@
   "engines": {
     "node": "12.9.1"
   },
+  "proxy": "http://localhost:8080",
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.6.4",
     "@testing-library/jest-dom": "^4.2.4",
@@ -29,6 +30,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "dev": "(cd server && npm run start ) & npm run start",
     "test": "",
     "eject": "react-scripts eject",
     "fix": "eslint . --fix --ext .js",

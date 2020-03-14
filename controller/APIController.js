@@ -24,7 +24,7 @@ apiRoutes.post("/api/singup",
 
             let newUserId = db.Create.User(user);
             //todo: add better error handling
-            (newUserIdres)? res.json(newUserId):res.write("error");
+            (newUserId)? res.json(newUserId):res.write("error");
         }
     }
 );
@@ -75,8 +75,17 @@ apiRoutes.get("/api/user/:id/projects", checkJwt,
 apiRoutes.get("/api/project/:id", checkJwt,
     async (req,res) => {
         let projId = req.params.id;
-        let project = await db.Get.ProjectById(id);
+        let project = await db.Get.ProjectById(projId);
         res.json(project);
+    }
+);
+
+//add collaborators to project
+apiRoutes.post("/api/project/:id/collaborators/add", checkJwt,
+    async (res,req) => {
+        let projectId = req.params.id;
+        let collaboratorId = req.body;
+        db.Update.AddCollaboraterToProject(id,collaboratorId);
     }
 );
 
@@ -84,8 +93,17 @@ apiRoutes.get("/api/project/:id", checkJwt,
 apiRoutes.get("/api/user/:id/mentor", checkJwt,
     async (req, res) => {
         let userId = req.params.id;
-        let mentor = await db.Get.MentorsBuUserId(id);
+        let mentor = await db.Get.MentorsByUserId(userId);
         res.json(mentor);
+    }
+);
+
+//get mentees by user id
+apiRoutes.get("/api/user/:id/mentees", checkJwt,
+    async (req, res) => {
+        let userId = req.params.id;
+        let mentees = await db.Get.MenteesByUserId(userId);
+        res.json(mentees);
     }
 );
 
@@ -99,8 +117,54 @@ apiRoutes.post("/api/project/add", checkJwt,
             tags: project.tags,
             externalLink: project.link.trim()
         };
-        db.Create.Project(newProject);
+        let dbRes = db.Create.Project(newProject);
+        res.json(dbRes);
     }
 );
 
-modules.exports.apiRoutes;
+//update project
+apiRoutes.post("/api/project/:id/update", checkJwt,
+    async (req, res) => {
+        let projId = req.params.id;
+        let project = req.body;
+        let updatedProj = {
+            owner: project.userId,
+            name: project.name.trim(),
+            tags: project.tags,
+            externalLink: project.link.trim()
+        };
+        let dbRes = await db.Update.Project(projId, updatedProj);
+        res.json(dbRes);
+        }
+);
+
+//add comment to project
+apiRoutes.post("/api/project/:id/:userid/comment", checkJwt,
+    async (req, res) => {
+        let projId = req.params.id;
+        let userId = req.params.userid;
+        let comment = req.body.comment;
+        let dbRes = await db.Update.AddCommentToProject(projId, userId, comment);
+        res.json(dbRes);
+    }
+);
+
+
+//delete user by id
+apiRoutes.delete("/api/user/:id", checkJwt,
+    async (req, res) => {
+        let userId = req.params.id;
+        await db.Delete.UserById(userId);
+        res.send("User deleted");
+    }
+);
+
+//delete project by id
+apiRoutes.delete("/api/project/:id", checkJwt,
+    async (req, res) => {
+        let projId = req.params.id;
+        await db.Delete.ProjectById(projId);
+        res.send("Project deleted");
+    });
+
+module.exports = apiRoutes;
