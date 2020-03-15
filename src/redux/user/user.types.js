@@ -1,3 +1,3 @@
 export const UserActionTypes = {
-  IS_LOGED_IN: "IS_LOGED_IN"
+  USER_OBJECT: "USER_OBJECT",
 }
