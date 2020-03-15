@@ -2,6 +2,10 @@ import React,{useState} from 'react';
 import Panel from '../../components/panel/panel.component';
 import Header from '../../components/header/header.component';
 import history from '../../utils/history';
+import {useAuth0} from '../../react-auth0-spa';
+
+
+
 
 const CreateProject = () => {
 
@@ -10,11 +14,31 @@ const CreateProject = () => {
   const [techList, setTechlist] = useState();
   const [needHelp, setNeedHelp] = useState();
   const [githubRepo,setGithubRepo] = useState();
+  const {user,isAuthenticated,getTokenSilently,getIdTokenClaims} = useAuth0();
 
-  const submitData = (e) => {
+  const getUserID = async function(){
+    let userName = user.nickname;    
+    let mUser = await (await fetch(`/api/user/byname/${userName}`)).json();
+    console.log("user:",mUser);
+    if(mUser.message){
+      return null;
+    }else{
+      return mUser._id;
+    }
+  }
+
+  const submitData = async (e) => {
     e.preventDefault();
 
+    let userId = await getUserID();
+
+    if(!userId || !isAuthenticated){
+      console.log("user not logged in or doesn't exist");
+      return;
+    }
+
     const userData = {
+      userId,
       title,
       description,
       techList,
@@ -25,7 +49,8 @@ const CreateProject = () => {
     const settings = {
       method: 'POST',
       headers:{
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${await getTokenSilently()}`
       },
       body: JSON.stringify(userData)
     }
@@ -35,12 +60,16 @@ const CreateProject = () => {
 
     fetch(url,settings)
     .then( resp => {
-      if (resp === 200) {
-        history.push('/project')
+      if (resp.statusCode === 200) {
+        history.push('/project');
       }
     })
-    .catch(err=>console.log(err))
+    .catch(err=>console.log(err));
+
+    
   }
+
+  
 
   return(
     <>
@@ -66,14 +95,14 @@ const CreateProject = () => {
 
             <label>
               <div>
-                Project Desciprtion:<input onChange={(e)=>{setDescription(e.target.value)}} name='description' type="text" />
+                Project Description:<input onChange={(e)=>{setDescription(e.target.value)}} name='description' type="text" />
               </div>
                 <span className="label-info" >What is your project about?</span>
             </label>
 
             <label>
               <div>
-                Technologies: <input onChange={(e)=>{setTechlist(e.target.value)}} name='technology' type="text" />
+                Technologies: <input onChange={(e)=>{setTechlist(e.target.value.split(',').map(e=>e.trim()))}} name='technology' type="text" />
               </div>
               <span className="label-info" >example: js,html,css</span>
             </label>

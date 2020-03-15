@@ -36,7 +36,7 @@ apiRoutes.post("/api/signup",
 );
 
 //update user
-apiRoutes.post('/api/user/:id', checkJwt,
+apiRoutes.post('/api/user/:id', 
     async (req, res) => {
         let userId = req.params.id;
         let updatedUserInfo = req.body;
@@ -56,7 +56,7 @@ apiRoutes.post('/api/user/:id', checkJwt,
 );
 
 //get user
-apiRoutes.get("/api/user/:id",checkJwt,
+apiRoutes.get("/api/user/:id",
     async (req,res)=>{
         let userId = req.params.id;
         let user = await db.Get.UserById(userId);
@@ -68,8 +68,20 @@ apiRoutes.get("/api/user/:id",checkJwt,
     }
 );
 
+apiRoutes.get("/api/user/byname/:username", 
+    async (req,res) =>{
+        let userName = req.params.username;
+        let user = await db.Get.UserByUserName(userName);
+        if(user != null){
+            res.json(user);
+        }else{
+            res.json({message:"User does not exist"})
+        }
+    }
+);
+
 //get projects by userId
-apiRoutes.get("/api/user/:id/projects", checkJwt,
+apiRoutes.get("/api/user/:id/projects", 
     async (req,res) => {
         let userId = req.params.id;
         let projects = await db.Get.ProjectsByUserId(userId);        
@@ -78,7 +90,7 @@ apiRoutes.get("/api/user/:id/projects", checkJwt,
 );
 
 //get project by id
-apiRoutes.get("/api/project/:id", checkJwt,
+apiRoutes.get("/api/project/:id", 
     async (req,res) => {
         let projId = req.params.id;
         let project = await db.Get.ProjectById(projId);
@@ -87,17 +99,17 @@ apiRoutes.get("/api/project/:id", checkJwt,
 );
 
 //add collaborators to project
-apiRoutes.post("/api/project/:id/collaborators/add", checkJwt,
+apiRoutes.post("/api/project/:id/collaborators/add", 
     async (res,req) => {
         let projectId = req.params.id;
         let collaboratorId = req.body;
-        let dbRes = db.Update.AddCollaboraterToProject(id,collaboratorId);
+        let dbRes = db.Update.AddCollaboraterToProject(projectId,collaboratorId);
         res.json(dbRes);
     }
 );
 
 //get mentor by user id
-apiRoutes.get("/api/user/:id/mentor", checkJwt,
+apiRoutes.get("/api/user/:id/mentor", 
     async (req, res) => {
         let userId = req.params.id;
         let mentor = await db.Get.MentorsByUserId(userId);
@@ -106,7 +118,7 @@ apiRoutes.get("/api/user/:id/mentor", checkJwt,
 );
 
 //get mentees by user id
-apiRoutes.get("/api/user/:id/mentees", checkJwt,
+apiRoutes.get("/api/user/:id/mentees", 
     async (req, res) => {
         let userId = req.params.id;
         let mentees = await db.Get.MenteesByUserId(userId);
@@ -115,14 +127,15 @@ apiRoutes.get("/api/user/:id/mentees", checkJwt,
 );
 
 //add project
-apiRoutes.post("/api/project/add", checkJwt,
+apiRoutes.post("/api/project/add", 
     async (req, res) => {
         let project = req.body;
         let newProject = {
             owner: project.userId,
-            name: project.name.trim(),
-            tags: project.tags,
-            externalLink: project.link.trim()
+            name: project.title.trim(),
+            tags: project.techList,
+            externalLink: project.githubRepo.trim(),
+            description: project.description 
         };
         let dbRes = db.Create.Project(newProject);
         res.json(dbRes);
@@ -130,7 +143,7 @@ apiRoutes.post("/api/project/add", checkJwt,
 );
 
 //update project
-apiRoutes.post("/api/project/:id/update", checkJwt,
+apiRoutes.post("/api/project/:id/update", 
     async (req, res) => {
         let projId = req.params.id;
         let project = req.body;
@@ -146,7 +159,7 @@ apiRoutes.post("/api/project/:id/update", checkJwt,
 );
 
 //add comment to project
-apiRoutes.post("/api/project/:id/:userid/comment", checkJwt,
+apiRoutes.post("/api/project/:id/:userid/comment", 
     async (req, res) => {
         let projId = req.params.id;
         let userId = req.params.userid;
@@ -157,7 +170,7 @@ apiRoutes.post("/api/project/:id/:userid/comment", checkJwt,
 );
 
 //add tags to project
-apiRoutes.post("/api/project/:id/tags", checkJwt,
+apiRoutes.post("/api/project/:id/tags", 
     async (req, res) => {
         let projId = req.params.id;
         let tags = req.body.tags;
@@ -168,7 +181,7 @@ apiRoutes.post("/api/project/:id/tags", checkJwt,
 
 
 //delete user by id
-apiRoutes.delete("/api/user/:id", checkJwt,
+apiRoutes.delete("/api/user/:id", 
     async (req, res) => {
         let userId = req.params.id;
         let dbRes = await db.Delete.UserById(userId);
@@ -177,7 +190,7 @@ apiRoutes.delete("/api/user/:id", checkJwt,
 );
 
 //delete project by id
-apiRoutes.delete("/api/project/:id", checkJwt,
+apiRoutes.delete("/api/project/:id", 
     async (req, res) => {
         let projId = req.params.id;
         let dbRes = await db.Delete.ProjectById(projId);
@@ -186,7 +199,7 @@ apiRoutes.delete("/api/project/:id", checkJwt,
 );
 
 //create badge
-apiRoutes.post("/api/badge/create", checkJwt,
+apiRoutes.post("/api/badge/create", 
     async (req, res) => {
         let badge = req.body;
         let badgeInfo = {
@@ -201,7 +214,7 @@ apiRoutes.post("/api/badge/create", checkJwt,
 );
 
 //delete badge
-apiRoutes.delete("/api/badge/:id/delete", checkJwt,
+apiRoutes.delete("/api/badge/:id/delete", 
     async (req, res) => {
         let badgeId = req.params.id;
         let dbRes = await db.Delete.BadgeById(badgeId);
@@ -210,7 +223,7 @@ apiRoutes.delete("/api/badge/:id/delete", checkJwt,
 );
 
 //get badges
-apiRoutes.get("/api/user/:id/badge", checkJwt,
+apiRoutes.get("/api/user/:id/badge", 
     async (req, res) => {
         let userId = req.params.id;
         let badges = await db.Get.BadgesByUserId(userId);
@@ -219,7 +232,7 @@ apiRoutes.get("/api/user/:id/badge", checkJwt,
 );
 
 //create achievement
-apiRoutes.post("/api/achivement/create", checkJwt,
+apiRoutes.post("/api/achivement/create", 
     async (req, res) => {
         let achievement = req.body;
         let achievementInfo = {
@@ -234,7 +247,7 @@ apiRoutes.post("/api/achivement/create", checkJwt,
 );
 
 //delete achievement
-apiRoutes.delete("/api/achievement/:id/delete", checkJwt,
+apiRoutes.delete("/api/achievement/:id/delete", 
     async (req, res) => {
         let achieveId = req.params.id;
         let dbRes = await db.Delete.AchievementById(achieveId);
@@ -243,7 +256,7 @@ apiRoutes.delete("/api/achievement/:id/delete", checkJwt,
 );
 
 //get achievements
-apiRoutes.get("/api/user/:id/achievement", checkJwt,
+apiRoutes.get("/api/user/:id/achievement", 
     async (req, res) => {
         let userId = req.params.id;
         let achievements = db.Get.AchievementsByUserId(userId);

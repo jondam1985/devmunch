@@ -80,8 +80,7 @@ const ProjectsPage = () => {
 
   useEffect(()=>{
     console.log(projectList)
-  },[projectList])
-
+  },[projectList]);
 
   return(
     <>
