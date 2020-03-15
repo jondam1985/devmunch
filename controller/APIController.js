@@ -241,7 +241,7 @@ apiRoutes.post("/api/achivement/create",
             description: achievement.description,
             graphic: achievement.source
         }
-        let dbRes = await db.Create.Achievement(achievement);
+        let dbRes = await db.Create.Achievement(achievementInfo);
         res.send(dbRes);
     }
 );
@@ -263,7 +263,5 @@ apiRoutes.get("/api/user/:id/achievement",
         res.json(achievements);
     }
 );
-
-
 
 module.exports = apiRoutes;

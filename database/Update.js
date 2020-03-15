@@ -35,7 +35,7 @@ const Update = {
      */
     UserLogIn: async (id) => {
        return errorWrapper(() =>  Model.user.FindByIdAndUpdate(ObjectID(id),{
-            $set:{lastLogIn: Date.now}
+            $set:{lastLogIn: Date.now()}
         }));
     },
 
@@ -86,6 +86,20 @@ const Update = {
         }));
     },
 
+    /**
+     * @param {ObjectID} id id of the project
+     * @param {[ObjectID]} collaboraterIds array of user ids to add to the project
+     */
+    AddCollaboratorToProjectBulk: async (id, collaboraterIds) =>{
+
+        return errorWrapper(() => Model.Project.FindByIdAndUpdate(ObjectID(id),
+        {
+            $push:
+            {
+                collaborators:{ $each: collaboraterIds.map(e=>ObjectID(e))}
+            }
+        }));
+    }, 
     /**
      * adds a list of tags to the tags property for the given project
      * @param {ObjectID} id id of the project to be udpated
