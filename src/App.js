@@ -10,6 +10,7 @@ import Dashboard from './pages/dashboard-page/dashboard.component';
 import MyMentors from './pages/my-mentors-page/my-mentors.component';
 import MentorsList from './pages/mentors-list-page/mentors-list.component';
 import Project from './pages/projects-page/projects-page.component';
+import CreateProject from './pages/createproject/createproject.component'
 
 import Settings from './pages/settings-page/settings.component';
 import Help from './pages/help-page/help.component';
@@ -49,7 +50,7 @@ function App() {
     .then((resp)=>
       resp.json()
     ).then(data =>{
-      console.log(data);
+      console.log("!",data);
     })
     .catch(err=>console.log(err))
 
@@ -81,6 +82,8 @@ function App() {
                     <PrivateRoute exact path='/project' component={Project}  />                    
                     <PrivateRoute exact path='/help' component={Help}  />
                     <PrivateRoute exact path='/settings' component={Settings}  />
+
+                    <PrivateRoute exact path='/createproject' component={CreateProject}  />
                   </Switch>
                   </div>
               </Router>
