@@ -91,7 +91,7 @@ apiRoutes.post("/api/project/:id/collaborators/add", checkJwt,
     async (res,req) => {
         let projectId = req.params.id;
         let collaboratorId = req.body;
-        let dbRes = db.Update.AddCollaboraterToProject(id,collaboratorId);
+        let dbRes = db.Update.AddCollaboraterToProject(projectId,collaboratorId);
         res.json(dbRes);
     }
 );
@@ -228,7 +228,7 @@ apiRoutes.post("/api/achivement/create", checkJwt,
             description: achievement.description,
             graphic: achievement.source
         }
-        let dbRes = await db.Create.Achievement(achievement);
+        let dbRes = await db.Create.Achievement(achievementInfo);
         res.send(dbRes);
     }
 );
@@ -243,14 +243,12 @@ apiRoutes.delete("/api/achievement/:id/delete", checkJwt,
 );
 
 //get achievements
-apiRoutes.get("/api/user/:id/achievement", checkJwt,
+apiRoutes.get("/api/user/:id/achievements", checkJwt,
     async (req, res) => {
         let userId = req.params.id;
         let achievements = db.Get.AchievementsByUserId(userId);
         res.json(achievements);
     }
 );
-
-
 
 module.exports = apiRoutes;
