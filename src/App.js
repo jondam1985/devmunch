@@ -24,11 +24,11 @@ import { useAuth0 } from "./react-auth0-spa";
 
 import {connect} from 'react-redux'
 
-function App() {
+function App(props) {
   const { loading , isAuthenticated,user} = useAuth0();
 
   const sendUserDataToServer = () => {
-    setUserObject(user)
+    props.set_UserObject(user)
 
     const userData = {
       userName: user.nickname,
@@ -108,7 +108,7 @@ function App() {
 const mapDispatchToProps = dispatch => {
 
   return {
-    setUserObject: state => dispatch(setUserObject(state))
+    set_UserObject: state => dispatch(setUserObject(state))
   }
 }
 

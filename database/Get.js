@@ -35,7 +35,7 @@ const Get =  {
      * @returns {Model<Document, model.User>} User or null
      */
     UserByUserName: async (userName) => {
-        return errorWrapper(()=> model.User.find({userName:userName}));
+        return errorWrapper(()=> model.User.findOne({userName:userName}));
     },
     /**
      *@param {String} username username to check if exists (github); 
