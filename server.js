@@ -1,10 +1,10 @@
 const express = require("express");
 const path = require("path");
-const API = require("../routes/api");
+const API = require("./routes/api");
 const PORT = process.env.PORT || 8080;
 const app = express();
 const mongoose = require('mongoose');
-const apiRoutes = require('../controller/APIController');
+const apiRoutes = require('./controller/APIController');
 const {resolve} = require('path');
 const cors = require('cors');
 require('dotenv').config({path: resolve(__dirname,"../.env")});
