@@ -5,7 +5,8 @@ import Header from '../../components/header/header.component';
 import {connect} from 'react-redux';
 
 const Settings = (props) => {
-const {picture} = props.user;
+const {picture} = props.user.userObject;
+
   return(
     <>
     <Panel />

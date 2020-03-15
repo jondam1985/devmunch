@@ -1,6 +1,8 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 import './App.css';
 import './style/style.css';
+
+import {setUserObject} from '../src/redux/user/user.action';
 
 import {Switch,Router} from 'react-router-dom';
 
@@ -22,10 +24,11 @@ import { useAuth0 } from "./react-auth0-spa";
 
 import {connect} from 'react-redux'
 
-function App() {
+function App(props) {
   const { loading , isAuthenticated,user} = useAuth0();
 
   const sendUserDataToServer = () => {
+    props.set_UserObject(user)
 
     const userData = {
       userName: user.nickname,
@@ -33,7 +36,6 @@ function App() {
       pictureUrl: user.picture,
       fullName: user.name,
       gitHubId: user.nickname
-    
     }; 
 
     const settings = {
@@ -106,7 +108,7 @@ function App() {
 const mapDispatchToProps = dispatch => {
 
   return {
-    x:"x"
+    set_UserObject: state => dispatch(setUserObject(state))
   }
 }
 
