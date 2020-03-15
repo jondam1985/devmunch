@@ -1,9 +1,20 @@
 const model = require('../models/Model');
 const { ObjectID } = require('mongodb');
 
-function cb(err, res){
-    if(err) throw new Error(err);
-    return res;
+/**
+ * wraps DB calls in try catch for error handling
+ * usage: errorWrapper(() => Model.Get.User(params))
+ * @param {*} func 
+ * @returns {*} result of func if it does not error out
+ */
+const errorWrapper = async (func) =>{
+    try{
+        let res = await func();    
+        return res;
+    }catch(err){
+        console.log(err);
+    }
+    
 }
 /**
  * Collection of Create methods from the database
@@ -15,8 +26,11 @@ const Create = {
      * @param {User} user
      * @return {ObjectID} objectID of created User
      */
-    User: (user) => {
-        model.User.create(user, cb);
+    User: async (user) => {
+        return errorWrapper(async () =>{ 
+            let u = await model.User.create(user)
+            return u._id            
+        });
     },
 
     /**
@@ -24,8 +38,11 @@ const Create = {
      * @param {model.Badge} badge
      * @return {ObjectID} objectID of created Badge
      */
-    Badge: (badge) => {
-        model.Badge.create(badge, cb);
+    Badge: async (badge) => {
+       return errorWrapper(async () => {
+           let b = await model.Badge.create(badge)
+            return b._id;
+        });
     },
 
     /**
@@ -33,8 +50,11 @@ const Create = {
      * @param {model.Achievement} achievement
      * @return {ObjectID} objectID of created Achievement
      */
-    Achievement: (achievement) => {        
-        model.Achievement.create(achievement, cb);        
+    Achievement: async (achievement) => {        
+       return errorWrapper(async () => {
+           let a = await model.Achievement.create(achievement)
+            return a._id;
+        });        
     },
 
     /**
@@ -42,8 +62,11 @@ const Create = {
      * @param {model.project} project
      * @return {ObjectID} objectID of created Project
      */
-    Project: (project) => {
-        model.Project.create(project, cb);
+    Project: async (project) => {
+        return errorWrapper(async () => {
+            let p = await model.Project.create(project);
+            return p.id
+        });
     }
 }
 

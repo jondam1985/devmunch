@@ -2,12 +2,20 @@ const model = require('../models/Model');
 const { ObjectID } = require('mongodb');
 const {Model} = require('mongoose');
 
-
-function cb(err, res){
-    if(err) throw new Error(err);
-    return res;
+/**
+ * wraps DB calls in try catch for error handling
+ * usage: errorWrapper(() => Model.Get.User(params))
+ * @param {*} func 
+ * @returns {*} result of func if it does not error out
+ */
+const errorWrapper = async (func) =>{
+    try{
+        let res = await func();
+        return res;
+    }catch(err){
+        console.log(err);
+    }
 }
-
 /**
  * Collection of Get methods from the database
  */
@@ -18,22 +26,31 @@ const Get =  {
      * @param {ObjectID} id user Id
      * @returns {Model<Document, model.User>} User or null
      */
-    UserById: (id) => {
-        model.User.findById(id, cb);
+    UserById: async (id) => {
+        return errorWrapper(()=> model.User.findById(ObjectID(id)));
+    },
+    /**
+     * Finds a single user by their id
+     * @param {String} userName user userName
+     * @returns {Model<Document, model.User>} User or null
+     */
+    UserByUserName: async (userName) => {
+        return errorWrapper(()=> model.User.find({userName:userName}));
     },
     /**
      *@param {String} username username to check if exists (github); 
      */
-    UserExists: (username) => {
-        model.User.exists({userName:username},cb);
+    UserExists: async (username) => {
+        console.log("testing username:",username);
+        return errorWrapper(() => model.User.exists({userName:username}));
     },
     /**
      * finds all mentors of the given user
      * @param {ObjectID} id user Id
      * @return {[model.User]}
      */
-    MentorsByUserId: (id) => {         
-        model.User.find({mentees:id}, cb);        
+    MentorsByUserId: async (id) => {         
+       return errorWrapper( () => model.User.find({mentees:ObjectID(id)}));        
     },
 
     /**
@@ -41,11 +58,11 @@ const Get =  {
      * @param {ObjectID} id user Id
      * @return {[User]} array of Users
      */
-    MenteesByUserId: (id)=>{
-        model.User.findById(id)
-        .populate({path:'mentees'},(err,res)=>{
-            if(err) throw new Error(err);
-            return res.mentees;
+    MenteesByUserId: async (id)=>{
+       return errorWrapper(async ()=> {
+        let u = await model.User.findById(ObjectID(id))
+        .populate({path:'mentees'});        
+        return u.mentees;
         });
     },
 
@@ -54,11 +71,11 @@ const Get =  {
      * @param {ObjectID} id user Id
      * @return {[Badge]} 
      */
-    BadgesByUserId: (id) => {
-        model.User.findById(id)
-        .populate({path:'badges'},(err,res)=>{
-            if(err) throw new Error(err);
-            return res.badges;
+    BadgesByUserId: async (id) => {
+       return errorWrapper( async ()=>{
+        let u = await model.User.findById(ObjectID(id))
+        .populate({path:'badges'});
+        return u.badges;
         });
     },
     /**
@@ -66,12 +83,12 @@ const Get =  {
      * @param {ObjectID} id user Id
      * @return {[Schema<Achievement>]} achievements
      */
-    AchievementsByUserId: (id) =>{
-        model.User.findById(id)
-        .populate({path:'achievements'},(err,res)=>{
-            if(err) throw new Error(err);
-            return res.achievements;
-        });
+    AchievementsByUserId: async (id) =>{
+       return errorWrapper( async ()=>{
+        let u = await model.User.findById(ObjectID(id))
+        .populate({path:'achievements'});
+        return u.achievements;
+       });
     },
 
     /**
@@ -79,12 +96,14 @@ const Get =  {
      * @param {ObjectID} id user Id
      * @return {[Model]} projects     
      */
-    ProjectsByUserId: (id) => {
-        model.User.findById(id)
-        .populate({path:'projects'},(err,res)=>{
-            if(err) throw new Error(err);
-            return res.projects;
-        });
+    ProjectsByUserId: async (id) => {
+       return errorWrapper( async () =>
+       {
+        let u = await model.User.findById(ObjectID(id))
+        .populate({path:'projects'});
+        return u.projects;
+        }
+       );
     },
 
     /**
@@ -92,8 +111,8 @@ const Get =  {
      * @param {ObjectID} id project id
      * @return {Model} project
      */
-    ProjectById: (id) =>{
-        model.Project.findById(id, cb);
+    ProjectById: async (id) =>{
+       return errorWrapper( ()=>model.Project.findById(ObjectID(id)));
     }
 }
 

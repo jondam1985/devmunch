@@ -36,19 +36,20 @@ function App() {
     }; 
 
     const settings = {
-      method: 'POST',
-      mode: "no-cors",
+      method: 'POST',      
       headers:{
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(userData)
     }
 
-    const url = "https://localhost:3000/api/signup"
+    const url = "/api/signup"
 
     fetch(url,settings)
-    .then((resp)=>{
-      console.log(resp)
+    .then((resp)=>
+      resp.json()
+    ).then(data =>{
+      console.log(data);
     })
     .catch(err=>console.log(err))
 

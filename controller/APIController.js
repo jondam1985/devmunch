@@ -5,11 +5,15 @@ const apiRoutes = express.Router();
 const checkJwt = require('./jwtAuth');
 
 //new user signup
-apiRoutes.post("/api/singup",
+apiRoutes.post("/api/signup",
     async (req,res)=>{
+
         let userName = req.body.userName;
-        if(db.Get.UserExists(userName)){
-            res.write("User already exists");
+        let exists = await db.Get.UserExists(userName);
+        
+        if(exists){
+            console.log("user already exists");
+            res.json({message:"User already exists"});
         }else{
             let newUser = req.body;
 
@@ -22,9 +26,11 @@ apiRoutes.post("/api/singup",
                 langInterestTags: newUser.Tags || []
             };
 
-            let newUserId = db.Create.User(user);
+            let newUserId = await db.Create.User(user);
+            console.log("new user created");
+            console.log(newUserId);
             //todo: add better error handling
-            (newUserId)? res.json(newUserId):res.write("error");
+            (newUserId)? res.json(newUserId):res.json({message:"error"});
         }
     }
 );
@@ -57,7 +63,7 @@ apiRoutes.get("/api/user/:id",checkJwt,
         if(user != null){
             res.json(user);
         }else{
-            res.write("User does not exist");
+            res.json({message:"User does not exist"});
         }
     }
 );
@@ -85,7 +91,8 @@ apiRoutes.post("/api/project/:id/collaborators/add", checkJwt,
     async (res,req) => {
         let projectId = req.params.id;
         let collaboratorId = req.body;
-        db.Update.AddCollaboraterToProject(id,collaboratorId);
+        let dbRes = db.Update.AddCollaboraterToProject(id,collaboratorId);
+        res.json(dbRes);
     }
 );
 
@@ -149,13 +156,23 @@ apiRoutes.post("/api/project/:id/:userid/comment", checkJwt,
     }
 );
 
+//add tags to project
+apiRoutes.post("/api/project/:id/tags", checkJwt,
+    async (req, res) => {
+        let projId = req.params.id;
+        let tags = req.body.tags;
+        let dbRes = await db.Update.AddTagsProject(projId, tags);
+        res.json(dbRes);
+    }
+);
+
 
 //delete user by id
 apiRoutes.delete("/api/user/:id", checkJwt,
     async (req, res) => {
         let userId = req.params.id;
-        await db.Delete.UserById(userId);
-        res.send("User deleted");
+        let dbRes = await db.Delete.UserById(userId);
+        res.send(dbRes);
     }
 );
 
@@ -163,8 +180,77 @@ apiRoutes.delete("/api/user/:id", checkJwt,
 apiRoutes.delete("/api/project/:id", checkJwt,
     async (req, res) => {
         let projId = req.params.id;
-        await db.Delete.ProjectById(projId);
-        res.send("Project deleted");
-    });
+        let dbRes = await db.Delete.ProjectById(projId);
+        res.send(dbRes);
+    }
+);
+
+//create badge
+apiRoutes.post("/api/badge/create", checkJwt,
+    async (req, res) => {
+        let badge = req.body;
+        let badgeInfo = {
+            name: badge.name,
+            level: badge.levelValue,
+            description: badge.description,
+            graphic: badge.source
+        }
+        let dbRes = await db.Create.Badge(badgeInfo);
+        res.send(dbRes);
+    }
+);
+
+//delete badge
+apiRoutes.delete("/api/badge/:id/delete", checkJwt,
+    async (req, res) => {
+        let badgeId = req.params.id;
+        let dbRes = await db.Delete.BadgeById(badgeId);
+        res.send(dbRes);
+    }
+);
+
+//get badges
+apiRoutes.get("/api/user/:id/badge", checkJwt,
+    async (req, res) => {
+        let userId = req.params.id;
+        let badges = await db.Get.BadgesByUserId(userId);
+        res.json(badges);
+    }
+);
+
+//create achievement
+apiRoutes.post("/api/achivement/create", checkJwt,
+    async (req, res) => {
+        let achievement = req.body;
+        let achievementInfo = {
+            name: achievement.name,
+            level: achievement.levelValue,
+            description: achievement.description,
+            graphic: achievement.source
+        }
+        let dbRes = await db.Create.Achievement(achievement);
+        res.send(dbRes);
+    }
+);
+
+//delete achievement
+apiRoutes.delete("/api/achievement/:id/delete", checkJwt,
+    async (req, res) => {
+        let achieveId = req.params.id;
+        let dbRes = await db.Delete.AchievementById(achieveId);
+        res.send(dbRes);
+    }
+);
+
+//get achievements
+apiRoutes.get("/api/user/:id/achievement", checkJwt,
+    async (req, res) => {
+        let userId = req.params.id;
+        let achievements = db.Get.AchievementsByUserId(userId);
+        res.json(achievements);
+    }
+);
+
+
 
 module.exports = apiRoutes;

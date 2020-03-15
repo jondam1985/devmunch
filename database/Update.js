@@ -1,9 +1,19 @@
 const Model = require('../models/Model');
 const { ObjectID } = require('mongodb');
 
-function cb(err, res){
-    if(err) throw new Error(err);
-    return res;
+/**
+ * wraps DB calls in try catch for error handling
+ * usage: errorWrapper(() => Model.Get.User(params))
+ * @param {*} func 
+ * @returns {*} result of func if it does not error out
+ */
+const errorWrapper = async (func) =>{
+    try{
+        let res = await func();
+        return res;
+    }catch(err){
+        console.log(err);
+    }
 }
 
 /**
@@ -15,18 +25,18 @@ const Update = {
      * @param {ObjectID} id id of the user
      * @param {Object} user User object to be updated from
      */
-    User: (id,user) => {
-        Model.User.FindByIdAndUpdate(id,user,cb);
+    User: async (id,user) => {
+       return errorWrapper(() =>  Model.User.FindByIdAndUpdate(ObjectID(id),user));
     },
 
     /**
      * updates the user's last login to the current time;
      * @param {ObjectID} id id of the user
      */
-    UserLogIn: (id) => {
-        Model.user.FindByIdAndUpdate(id,{
+    UserLogIn: async (id) => {
+       return errorWrapper(() =>  Model.user.FindByIdAndUpdate(ObjectID(id),{
             $set:{lastLogIn: Date.now}
-        }, cb);
+        }));
     },
 
     /**
@@ -34,8 +44,8 @@ const Update = {
      * @param {ObjectID} id id of the badge to be udpated
      * @param {Object} badge object of the badge info to be updated
      */
-    Badge: (id,badge) => {
-        Model.Badge.FindByIdAndUpdate(id,badge, cb);
+    Badge: async (id,badge) => {
+       return errorWrapper(() =>  Model.Badge.FindByIdAndUpdate(ObjectID(id),badge));
     },
 
     /**
@@ -43,8 +53,8 @@ const Update = {
      * @param {ObjectID} id id of the project to be udpated
      * @param {Object} project object of the project info to be updated
      */
-    Project: (id, project) => {
-        Model.Project.FindByIdAndUpdate(id,project, cb);
+    Project: async (id, project) => {
+       return errorWrapper(() =>  Model.Project.FindByIdAndUpdate(ObjectID(id),project));
     },
    
     /**
@@ -53,14 +63,14 @@ const Update = {
      * @param {ObjectID} userId userID of the message creator
      * @param {String} message new message
      */
-    AddCommentToProject: (id,userId,message) => {
-        Model.Project.FindByIdAndUpdate(id,{
+    AddCommentToProject: async (id,userId,message) => {
+       return errorWrapper(() =>  Model.Project.FindByIdAndUpdate(ObjectID(id),{
             $push:{
                 comments: {
-                    user: userId,
+                    user: ObjectID(userId),
                     message: message
                 }
-            }}, cb);
+            }}));
     },
 
     /**
@@ -68,12 +78,12 @@ const Update = {
      * @param {ObjectID} id id of the project to be udpated
      * @param {ObjectID} collaboraterId id of the user to be added to the project
      */
-    AddCollaboraterToProject: (id, collaboraterId) => {
-        Model.Project.FindByIdAndUpdate(id,{
+    AddCollaboraterToProject: async (id, collaboraterId) => {
+       return errorWrapper(() =>  Model.Project.FindByIdAndUpdate(ObjectID(id),{
             $push:{
-                collaborators: collaboraterId
+                collaborators: ObjectID(collaboraterId)
             }
-        }, cb);
+        }));
     },
 
     /**
@@ -82,22 +92,22 @@ const Update = {
      * @param {[String]} tags tags to be added
      * 
      */
-    AddTagsToProject: (id, tags) => {
-        Model.Project.FindByIdAndUpdate(id,{
+    AddTagsToProject: async (id, tags) => {
+      return errorWrapper(() =>  Model.Project.FindByIdAndUpdate(ObjectID(id),{
             $push:{
                 tags:{
                     $each:tags
                 }
             }
-        }, cb);
+        }));
     },
 
     /**
      * @param {ObjectID} id id of the user
      * @param {Object} achievement achievemnt object to be updated from
      */
-    Achievement: (id,achievement) => {        
-      Model.Achievement.FindByIdAndUpdate(id,achievement, cb);        
+    Achievement: async (id,achievement) => {        
+        return errorWrapper(() =>  Model.Achievement.FindByIdAndUpdate(ObjectID(id),achievement));        
     }
 }
 

@@ -5,14 +5,15 @@ const PORT = process.env.PORT || 8080;
 const app = express();
 const mongoose = require('mongoose');
 const apiRoutes = require('../controller/APIController');
+const {resolve} = require('path');
+const cors = require('cors');
+require('dotenv').config({path: resolve(__dirname,"../.env")});
 
 const bodyParser = require("body-parser");
 
-app.use(bodyParser.urlencoded({ extended: true }));
-
 //Middleware
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 //Static assets
 
@@ -27,13 +28,14 @@ mongoose.connect(process.env.MONGODB_URI || process.env.DEV_MONGODB || "mongodb:
   useUnifiedTopology: true 
 },(err)=>{
     if(err) {throw new Error(err)};
-    console.log("connected to: " + (process.env.MONGODB_URI?process.env.MONGODB_URI: process.env.DEV_MONGODB ? process.DEV_MONGODB:"localhost"));
+    console.log("connected to: " + (process.env.MONGODB_URI?process.env.MONGODB_URI: process.env.DEV_MONGODB ? process.env.DEV_MONGODB:"localhost"));
 });
 
-//API routes
+app.use(cors());
+//internal API routes
 app.use(apiRoutes);
+//external API routes
 app.use(API);
-
 
 //Other server calls
 app.get("*", (req, res) => {

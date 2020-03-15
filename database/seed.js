@@ -12,7 +12,8 @@ mongoose.connect(process.env.DEV_MONGODB || "mongodb://localhost/devmunch", {
   useUnifiedTopology: true 
 },(err)=>{
     if(err) {throw new Error(err)};
-    console.log("connected to: " + (process.env.DEV_MONGODB ? process.DEV_MONGODB:"localhost"));
+    
+    console.log("connected to: " + (process.env.DEV_MONGODB ? process.env.DEV_MONGODB:"localhost"));
 });
 
 let userSeed = [
@@ -39,7 +40,7 @@ let userSeed = [
         langInterestTags: ["Javascript","PHP","React"]
     },
     {
-        userName: "TestUser3",
+        userName: "TestUser2",
         email: "Test2@Test.com",
         pictureUrl: "",
         fullName: "Test McTestface2",

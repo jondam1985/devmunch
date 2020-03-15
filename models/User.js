@@ -12,7 +12,8 @@ const userSchema = new Schema(
   {
     userName: {
       type: String,
-      required: true
+      required: true,      
+      dropDups: true
     },
     email:{
         type:String,
@@ -89,7 +90,7 @@ const userSchema = new Schema(
   {timestamps: true}
 );
 
-userSchema.pre('findOneAndUpdate',()=>{
+userSchema.pre('findOneAndUpdate',function(){
     this.set({ lastUpdated: Date.now() });
 })
 
