@@ -1,8 +1,8 @@
 import {UserActionTypes} from './user.types';
 
-export const setUserLogInStatus = state => {
+export const setUserObject = state => {
   return {
-    type: UserActionTypes.IS_LOGED_IN,
+    type: UserActionTypes.USER_OBJECT,
     payload: state
   }
 }

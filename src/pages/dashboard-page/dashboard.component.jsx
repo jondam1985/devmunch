@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 
 const Dashboard = (props) => {
-  const {name,picture} = props.user;
+  const {name,picture} = props.user.userObject;
 
   return (
     <>

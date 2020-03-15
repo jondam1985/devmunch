@@ -8,7 +8,7 @@ const Header = (props) => {
 
   const {logout} = useAuth0();
 
-  const {nickname,name,picture} = props.user;
+  const {nickname,name,picture} = props.user.userObject;
   const {title} = props
 
   const [isOpen , setIsOpen] = useState(null)
