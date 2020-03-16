@@ -11,8 +11,6 @@ import { Auth0Provider } from "./react-auth0-spa";
 import config from "./auth_config.json";
 import history from "./utils/history";
 
-
-
 // A function that routes the user to the right place
 // after login
 const onRedirectCallback = appState => {
@@ -22,8 +20,10 @@ const onRedirectCallback = appState => {
       : "/dashboard"
   );
 };
-const REDIRECT_URI = (process.env.NODE_ENV === "production")?"https://dev-devmunch.herokuapp.com/dashboard":"http://localhost:3000/dashboard"; 
 
+console.log("environment:", process.env.NODE_ENV);
+const REDIRECT_URI = (process.env.NODE_ENV === "production")? "https://dev-devmunch.herokuapp.com/dashboard":"http://localhost:3000/dashboard"; 
+console.log("redirect URI:", REDIRECT_URI);
 ReactDOM.render(
     <Provider store={store}>
       <Auth0Provider
