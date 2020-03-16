@@ -15,6 +15,22 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+//Enforcing https:// (redirencting when call made to http://)
+app.use((req, res, next) => {
+	if (process.env.NODE_ENV == "production") {
+		if (req.headers["x-forwarded-proto"] !== "https") {
+			return res.redirect(`https://${req.headers.host}${req.url}`);
+		}
+		else {
+			return next();
+		}
+	}
+	else {
+		return next();
+	}
+});
+
+
 //Static assets
 
 if (process.env.NODE_ENV === "production") {
