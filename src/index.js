@@ -22,13 +22,14 @@ const onRedirectCallback = appState => {
       : "/dashboard"
   );
 };
+const REDIRECT_URI = (process.env.NODE_ENV === "production")?"https://dev-devmunch.herokuapp.com/dashboard":"http://localhost:3000/dashboard"; 
 
 ReactDOM.render(
     <Provider store={store}>
       <Auth0Provider
         domain={config.domain}
         client_id={config.clientId}
-        redirect_uri={'http://localhost:3000/dashboard'}
+        redirect_uri={REDIRECT_URI}
         onRedirectCallback={onRedirectCallback}
         returTo='/'
       >

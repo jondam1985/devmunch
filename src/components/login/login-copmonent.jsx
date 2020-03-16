@@ -23,7 +23,7 @@ const Login = () => {
                       <img src="img/github.png" alt=""/>
                   </div>
                   <div className="sign-up">
-                      Not a DebMunch member? <a href="" id="changeLoginContent">Sign up here</a>
+                      Not a DeVMunch member? <a href="" id="changeLoginContent">Sign up here</a>
                   </div>
               </div>
               <div className="signup-content" id="signup-content">

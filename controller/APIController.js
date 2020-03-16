@@ -256,11 +256,7 @@ apiRoutes.delete("/api/achievement/:id/delete",
 );
 
 //get achievements
-<<<<<<< HEAD
 apiRoutes.get("/api/user/:id/achievement", 
-=======
-apiRoutes.get("/api/user/:id/achievements", checkJwt,
->>>>>>> dev/main
     async (req, res) => {
         let userId = req.params.id;
         let achievements = db.Get.AchievementsByUserId(userId);
