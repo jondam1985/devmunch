@@ -22,7 +22,8 @@ const onRedirectCallback = appState => {
 };
 
 console.log("environment:", process.env.NODE_ENV);
-const REDIRECT_URI = process.env.NODE_ENV === "production" ? "https://devmunch-dev.herokuapp.com/dashboard":"http://localhost:3000/dashboard"; 
+//const REDIRECT_URI = process.env.NODE_ENV === "production" ? "https://devmunch-dev.herokuapp.com/dashboard":"http://localhost:3000/dashboard"; 
+const REDIRECT_URI = "https://devmunch-dev.herokuapp.com/dashboard";
 console.log("redirect URI:", REDIRECT_URI);
 ReactDOM.render(
     <Provider store={store}>
