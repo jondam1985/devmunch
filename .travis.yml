@@ -3,7 +3,7 @@ node_js:
 - stable
 before_install:
 - npm install -g npm@latest
-after_success:
+before_deploy:
 - npm run-script build
 deploy:
   provider: heroku
