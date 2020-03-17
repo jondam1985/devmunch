@@ -1,10 +1,10 @@
 const express = require("express");
 const path = require("path");
-const API = require("../routes/api");
+const API = require("./routes/api");
 const PORT = process.env.PORT || 8080;
 const app = express();
 const mongoose = require('mongoose');
-const apiRoutes = require('../controller/APIController');
+const apiRoutes = require('./controller/APIController');
 const {resolve} = require('path');
 const cors = require('cors');
 require('dotenv').config({path: resolve(__dirname,"../.env")});
@@ -14,6 +14,22 @@ const bodyParser = require("body-parser");
 //Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+//Enforcing https:// (redirencting when call made to http://)
+app.use((req, res, next) => {
+	if (process.env.NODE_ENV == "production") {
+		if (req.headers["x-forwarded-proto"] !== "https") {
+			return res.redirect(`https://${req.headers.host}${req.url}`);
+		}
+		else {
+			return next();
+		}
+	}
+	else {
+		return next();
+	}
+});
+
 
 //Static assets
 
