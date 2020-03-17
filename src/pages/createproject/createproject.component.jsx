@@ -4,9 +4,6 @@ import Header from '../../components/header/header.component';
 import history from '../../utils/history';
 import {useAuth0} from '../../react-auth0-spa';
 
-
-
-
 const CreateProject = () => {
 
   const [title, setTitle] = useState();
@@ -19,7 +16,6 @@ const CreateProject = () => {
   const getUserID = async function(){
     let userName = user.nickname;    
     let mUser = await (await fetch(`/api/user/byname/${userName}`)).json();
-    console.log("user:",mUser);
     if(mUser.message){
       return null;
     }else{
@@ -60,7 +56,7 @@ const CreateProject = () => {
 
     fetch(url,settings)
     .then( resp => {
-      if (resp.statusCode === 200) {
+      if (resp.status === 200) {
         history.push('/project');
       }
     })
@@ -146,16 +142,3 @@ const CreateProject = () => {
 }
 
 export default CreateProject;
-
-
-        //   {
-  //     project_image: 'link: to project img',
-  //     star_rating: [2,5],
-  //     mentor_numbers: 7,
-  //     comment_numbers: 105,
-  //     project_title: "Lorem impsum",
-  //     projet_desciprtion: "a little Lorem Ipsum, with ipsum tech",
-  //     technologies: ["php","html","css"],
-  //     contact_button_link: "link: to contact",
-  //     view_details_link: "link: to details"
-  //   }
