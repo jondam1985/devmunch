@@ -4,7 +4,7 @@ node_js:
 before_install:
 - npm install -g npm@latest
 after_success:
-- npm run build
+- npm run-script build
 deploy:
   provider: heroku
   edge: true
