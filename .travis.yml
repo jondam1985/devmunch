@@ -3,6 +3,8 @@ node_js:
 - stable
 before_install:
 - npm install -g npm@latest
+after_success:
+- npm run build
 deploy:
   provider: heroku
   edge: true
