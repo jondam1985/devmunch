@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const apiRoutes = require('./controller/APIController');
 const {resolve} = require('path');
 const cors = require('cors');
-require('dotenv').config({path: resolve(__dirname,"../.env")});
+require('dotenv').config({path: resolve(__dirname,"./.env")});
 
 const bodyParser = require("body-parser");
 
@@ -34,7 +34,7 @@ app.use((req, res, next) => {
 //Static assets
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("../client/build"));
+  app.use(express.static("./build"));
 }
 
 //db connect
@@ -55,7 +55,7 @@ app.use(API);
 
 //Other server calls
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+  res.sendFile(path.join(__dirname, "./build/index.html"));
 });
 
 app.listen(PORT, () => {
