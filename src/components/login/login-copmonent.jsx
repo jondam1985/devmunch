@@ -86,7 +86,7 @@ const Login = () => {
                       DevMunch
                   </h1>
                   <p>
-                      DevMunch
+                      Please log in to continue
                   </p>
                   <button id="login" 
                     onClick={() => loginWithRedirect({})}
@@ -98,10 +98,10 @@ const Login = () => {
                           <img src="img/github.png" alt=""/>
                       </div>
                       <div className="title">
-                          Lorem ipsum dolor sit amet
+                          Connect with other coders
                       </div>
                       <p>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                          Join our community of web developers from many different background.
                       </p>
                   </div>
                   <div className="info-item">
@@ -109,10 +109,10 @@ const Login = () => {
                           <img src="img/github.png" alt=""/>
                       </div>
                       <div className="title">
-                          Lorem ipsum dolor sit amet
+                          Find a mentor
                       </div>
                       <p>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                          Connect to coders with more experience. Form a friendship and learn!
                       </p>
                   </div>
                   <div className="info-item">
@@ -120,10 +120,10 @@ const Login = () => {
                           <img src="img/github.png" alt=""/>
                       </div>
                       <div className="title">
-                          Lorem ipsum dolor sit amet
+                          Become a mentor
                       </div>
                       <p>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                        Have experience? Gain exposure, win badges and unlcok achievments within your community.
                       </p>
                   </div>
               </div>

@@ -557,10 +557,18 @@ a {
   background: #4687E8; }
 
 .header__row {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: 550px;
   width: 100%;
   background: url("./img/home-bg.png") no-repeat;
   background-size: cover; }
+
+.header__row > h1 , .header__row > p {
+  color: white;
+} 
 
 .header__row .info {
   display: -webkit-box;
