@@ -28,7 +28,7 @@
     "redux": "^4.0.5"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server.js",
     "build": "react-scripts build",
     "dev": "(cd server && npm run start ) & npm run start",
     "test": "",
