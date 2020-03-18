@@ -3,14 +3,9 @@ node_js:
 - stable
 before_install:
 - npm install -g npm@latest
-<<<<<<< HEAD
 - npm install -g react-scripts
 before_deploy:
 - react-scripts build
-=======
-after_success:
-- npm run script build
->>>>>>> 42b9189a766d288d1bfa2816147f3539b740475a
 deploy:
   provider: heroku
   edge: true
