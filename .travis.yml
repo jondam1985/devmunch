@@ -5,7 +5,7 @@ before_install:
 - npm install -g npm@latest
 - npm install -g react-scripts
 before_deploy:
-- react-scripts build
+- CI=false npm run build
 deploy:
   provider: heroku
   edge: true
