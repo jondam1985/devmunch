@@ -1,26 +1,115 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import './style/style.css';
 
-function App() {
+import {setUserObject} from '../src/redux/user/user.action';
+
+import {Switch,Router} from 'react-router-dom';
+
+import Login from './components/login/login-copmonent';
+
+import Dashboard from './pages/dashboard-page/dashboard.component';
+import MyMentors from './pages/my-mentors-page/my-mentors.component';
+import MentorsList from './pages/mentors-list-page/mentors-list.component';
+import Project from './pages/projects-page/projects-page.component';
+import CreateProject from './pages/createproject/createproject.component'
+
+import Settings from './pages/settings-page/settings.component';
+import Help from './pages/help-page/help.component';
+
+import history from "./utils/history";
+
+import PrivateRoute from './components/PrivateRoute';
+import { useAuth0 } from "./react-auth0-spa";
+
+import {connect} from 'react-redux'
+
+function App(props) {
+  const { loading , isAuthenticated,user} = useAuth0();
+
+  const sendUserDataToServer = () => {
+    props.set_UserObject(user)
+
+    const userData = {
+      userName: user.nickname,
+      email: user.email,
+      pictureUrl: user.picture,
+      fullName: user.name,
+      gitHubId: user.nickname
+    }; 
+
+    const settings = {
+      method: 'POST',      
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userData)
+    }
+
+    const url = "/api/signup"
+
+    fetch(url,settings)
+    .then((resp)=>
+      resp.json()
+    ).then(data =>{
+      console.log("!",data);
+    })
+    .catch(err=>console.log(err))
+
+  }
+
+  if(loading){
+    return(
+      <div>Loading...</div>
+    )
+  }
+  
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          this a test :)
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {
+        isAuthenticated ? 
+          (
+            <>
+            {
+              sendUserDataToServer()
+            }
+              <Router history={history}>
+                {history.push('/dashboard')}
+                <div className="dashboard">
+                  <Switch>
+                    <PrivateRoute exact path='/dashboard' component={Dashboard}  />
+                    <PrivateRoute exact path='/mymentors' component={MyMentors}  />
+                    <PrivateRoute exact path='/mentorslist' component={MentorsList}  />
+                    <PrivateRoute exact path='/project' component={Project}  />                    
+                    <PrivateRoute exact path='/help' component={Help}  />
+                    <PrivateRoute exact path='/settings' component={Settings}  />
+
+                    <PrivateRoute exact path='/createproject' component={CreateProject}  />
+                  </Switch>
+                  </div>
+              </Router>
+            </>
+          )
+        :
+        <Login />
+      }
+    </>
   );
 }
 
-export default App;
+
+// const mapStateToProps = state => {
+//   return{
+
+//   }
+// }
+
+const mapDispatchToProps = dispatch => {
+
+  return {
+    set_UserObject: state => dispatch(setUserObject(state))
+  }
+}
+
+export default connect(null,mapDispatchToProps)(App);

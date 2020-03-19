@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="popup" id="popup">
+    <div class="mask" id="mask"></div>
+    <div class="popup-content">
+        <div class="login-content active" id="login-content">
+            <div class="title">
+                Log in
+            </div>
+            <h2>
+                Log in to your account
+            </h2>
+            <div class="img">
+                <img src="img/github.png" alt="">
+            </div>
+            <div class="sign-up">
+                Not a DebMunch member? <a href="" id="changeLoginContent">Sign up here</a>
+            </div>
+        </div>
+        <div class="signup-content" id="signup-content">
+            <div class="title">Sign up</div>
+            <h2>Sign up to your account</h2>
+            <form action="" class="form">
+                <div class="input-item">
+                    <input type="text" placeholder="name">
+                </div>
+                <div class="input-item">
+                    <input type="text" placeholder="Field of activity">
+                </div>
+                <div class="input-item">
+                    <input type="text" placeholder="Code wars optional">
+                </div>
+                <div class="input-item">
+                    <input type="text" placeholder="Tags of laguages of interest required">
+                </div>
+                <div class="tags">
+                    <div class="tag-item">
+                        <span class="close">
+                            <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.44661 2.99903L5.90752 5.45994C6.03083 5.58327 6.03083 5.78321 5.90752 5.90653C5.78419 6.02986 5.58423 6.02986 5.46092 5.90653L2.99999 3.44562L0.539085 5.90653C0.415757 6.02986 0.215812 6.02986 0.0924959 5.90653C-0.0308203 5.7832 -0.030832 5.58325 0.0924959 5.45994L2.55341 2.99903L0.0924959 0.53812C-0.030832 0.414793 -0.030832 0.214848 0.0924959 0.0915313C0.215824 -0.0317965 0.415769 -0.031785 0.539085 0.0915313L2.99999 2.55244L5.46089 0.0915313C5.58422 -0.0317965 5.78418 -0.031785 5.90749 0.0915313C6.03081 0.214859 6.03081 0.414804 5.90749 0.53812L3.44661 2.99903Z"
+      fill="#8C8C8C"/>
+</svg>
+                        </span>
+                        <span class="name">php</span>
+                    </div>
+                    <div class="tag-item">
+                        <span class="close">
+                            <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.44661 2.99903L5.90752 5.45994C6.03083 5.58327 6.03083 5.78321 5.90752 5.90653C5.78419 6.02986 5.58423 6.02986 5.46092 5.90653L2.99999 3.44562L0.539085 5.90653C0.415757 6.02986 0.215812 6.02986 0.0924959 5.90653C-0.0308203 5.7832 -0.030832 5.58325 0.0924959 5.45994L2.55341 2.99903L0.0924959 0.53812C-0.030832 0.414793 -0.030832 0.214848 0.0924959 0.0915313C0.215824 -0.0317965 0.415769 -0.031785 0.539085 0.0915313L2.99999 2.55244L5.46089 0.0915313C5.58422 -0.0317965 5.78418 -0.031785 5.90749 0.0915313C6.03081 0.214859 6.03081 0.414804 5.90749 0.53812L3.44661 2.99903Z"
+      fill="#8C8C8C"/>
+</svg>
+
+                        </span>
+                        <span class="name">html</span>
+                    </div>
+                    <div class="tag-item">
+                        <span class="close">
+                            <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.44661 2.99903L5.90752 5.45994C6.03083 5.58327 6.03083 5.78321 5.90752 5.90653C5.78419 6.02986 5.58423 6.02986 5.46092 5.90653L2.99999 3.44562L0.539085 5.90653C0.415757 6.02986 0.215812 6.02986 0.0924959 5.90653C-0.0308203 5.7832 -0.030832 5.58325 0.0924959 5.45994L2.55341 2.99903L0.0924959 0.53812C-0.030832 0.414793 -0.030832 0.214848 0.0924959 0.0915313C0.215824 -0.0317965 0.415769 -0.031785 0.539085 0.0915313L2.99999 2.55244L5.46089 0.0915313C5.58422 -0.0317965 5.78418 -0.031785 5.90749 0.0915313C6.03081 0.214859 6.03081 0.414804 5.90749 0.53812L3.44661 2.99903Z"
+      fill="#8C8C8C"/>
+</svg>
+
+                        </span>
+                        <span class="name">css</span>
+                    </div>
+                    <div class="tag-item">
+                        <span class="close">
+                            <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.44661 2.99903L5.90752 5.45994C6.03083 5.58327 6.03083 5.78321 5.90752 5.90653C5.78419 6.02986 5.58423 6.02986 5.46092 5.90653L2.99999 3.44562L0.539085 5.90653C0.415757 6.02986 0.215812 6.02986 0.0924959 5.90653C-0.0308203 5.7832 -0.030832 5.58325 0.0924959 5.45994L2.55341 2.99903L0.0924959 0.53812C-0.030832 0.414793 -0.030832 0.214848 0.0924959 0.0915313C0.215824 -0.0317965 0.415769 -0.031785 0.539085 0.0915313L2.99999 2.55244L5.46089 0.0915313C5.58422 -0.0317965 5.78418 -0.031785 5.90749 0.0915313C6.03081 0.214859 6.03081 0.414804 5.90749 0.53812L3.44661 2.99903Z"
+      fill="#8C8C8C"/>
+</svg>
+
+                        </span>
+                        <span class="name">css</span>
+                    </div>
+                    <div class="tag-item">
+                        <span class="close">
+                            <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.44661 2.99903L5.90752 5.45994C6.03083 5.58327 6.03083 5.78321 5.90752 5.90653C5.78419 6.02986 5.58423 6.02986 5.46092 5.90653L2.99999 3.44562L0.539085 5.90653C0.415757 6.02986 0.215812 6.02986 0.0924959 5.90653C-0.0308203 5.7832 -0.030832 5.58325 0.0924959 5.45994L2.55341 2.99903L0.0924959 0.53812C-0.030832 0.414793 -0.030832 0.214848 0.0924959 0.0915313C0.215824 -0.0317965 0.415769 -0.031785 0.539085 0.0915313L2.99999 2.55244L5.46089 0.0915313C5.58422 -0.0317965 5.78418 -0.031785 5.90749 0.0915313C6.03081 0.214859 6.03081 0.414804 5.90749 0.53812L3.44661 2.99903Z"
+      fill="#8C8C8C"/>
+</svg>
+
+                        </span>
+                        <span class="name">css</span>
+                    </div>
+                    <div class="tag-item">
+                        <span class="close">
+                            <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.44661 2.99903L5.90752 5.45994C6.03083 5.58327 6.03083 5.78321 5.90752 5.90653C5.78419 6.02986 5.58423 6.02986 5.46092 5.90653L2.99999 3.44562L0.539085 5.90653C0.415757 6.02986 0.215812 6.02986 0.0924959 5.90653C-0.0308203 5.7832 -0.030832 5.58325 0.0924959 5.45994L2.55341 2.99903L0.0924959 0.53812C-0.030832 0.414793 -0.030832 0.214848 0.0924959 0.0915313C0.215824 -0.0317965 0.415769 -0.031785 0.539085 0.0915313L2.99999 2.55244L5.46089 0.0915313C5.58422 -0.0317965 5.78418 -0.031785 5.90749 0.0915313C6.03081 0.214859 6.03081 0.414804 5.90749 0.53812L3.44661 2.99903Z"
+      fill="#8C8C8C"/>
+</svg>
+
+                        </span>
+                        <span class="name">css</span>
+                    </div>
+                </div>
+            </form>
+            <h2>
+                Do you want to be a mentor?
+            </h2>
+            <form action="" class="form">
+                <div class="input-item">
+                    <input type="text" placeholder="Stack required">
+                </div>
+                <div class="input-item">
+                    <input type="text" placeholder="Linkedin required">
+                </div>
+                <div class="input-item">
+                    <input type="text" placeholder="Stack required">
+                </div>
+            </form>
+
+            <button>
+                Sign Up with GitHub
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="header">
+    <div class="header__row">
+        <div class="container">
+            <div class="info">
+                <h1>
+                    DevMunch
+                </h1>
+                <p>
+                    DevMunch
+                </p>
+                <button id="open">
+                    Log in
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="info-block">
+            <div class="info-item">
+                <div class="img">
+                    <img src="img/video-conference.png" alt="">
+                </div>
+                <div class="title">
+                    Lorem ipsum dolor sit amet
+                </div>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                </p>
+            </div>
+            <div class="info-item">
+                <div class="img">
+                    <img src="img/github.png" alt="">
+                </div>
+                <div class="title">
+                    Lorem ipsum dolor sit amet
+                </div>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                </p>
+            </div>
+            <div class="info-item">
+                <div class="img">
+                    <img src="img/growth.png" alt="">
+                </div>
+                <div class="title">
+                    Lorem ipsum dolor sit amet
+                </div>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let mask = document.getElementById('mask');
+    let openBtn = document.getElementById('open');
+    let popup = document.getElementById('popup');
+    let change = document.getElementById('changeLoginContent');
+    let loginContent = document.getElementById('login-content');
+    let signUpContent = document.getElementById('signup-content');
+
+    mask.addEventListener('click', function () {
+        popup.classList.remove('active');
+        loginContent.classList.add('active');
+        signUpContent.classList.remove('active');
+    });
+    openBtn.addEventListener('click', function () {
+        popup.classList.add('active');
+    });
+
+    change.addEventListener('click', function (e) {
+        e.preventDefault();
+        loginContent.classList.remove('active');
+        signUpContent.classList.add('active');
+    })
+
+</script>
+</body>
+</html>
